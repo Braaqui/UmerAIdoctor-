@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Doctor - Sign Up</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #3a7bd5;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f8f9fa;
+            --danger: #ff4757;
+            --success: #2ed573;
+            --warning: #ffa502;
+            --glass: rgba(255, 255, 255, 0.05);
+            --neon-glow: 0 0 10px rgba(0, 210, 255, 0.8);
+            --transition: all 0.3s ease;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            transition: var(--transition);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(58, 123, 213, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 210, 255, 0.1) 0%, transparent 20%);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        body.light-mode {
+            background-color: var(--light);
+            color: var(--dark);
+            --glass: rgba(0, 0, 0, 0.05);
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            background: var(--glass);
+            border-radius: var(--border-radius-lg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        body.light-mode .auth-container {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-container:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+
+        .auth-logo:hover {
+            transform: translateY(-3px);
+        }
+
+        .auth-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .auth-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        body.light-mode .auth-subtitle {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .auth-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .auth-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: var(--primary);
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        body.light-mode .auth-form input {
+            color: var(--dark);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 210, 255, 0.2);
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: var(--border-radius-lg);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: var(--neon-glow);
+            margin-top: 10px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+        }
+
+        .btn-google {
+            background: white;
+            color: #5F6368;
+            border: 1px solid #DADCE0;
+            margin-top: 15px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            height: 44px;
+        }
+
+        .btn-google:hover {
+            background: #F8F9FA;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-color: #D2E3FC;
+        }
+
+        .btn-google:active {
+            background: #F1F3F4;
+        }
+
+        .google-icon-wrapper {
+            position: absolute;
+            left: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #DADCE0;
+        }
+
+        .google-icon {
+            width: 18px;
+            height: 18px;
+            background: conic-gradient(
+                from -45deg, 
+                #EA4335 110deg, 
+                #FBBC05 110deg 180deg, 
+                #34A853 180deg 270deg, 
+                #4285F4 270deg
+            );
+            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.545 10.239v3.821h5.445c-0.712 2.315-2.647 3.972-5.445 3.972-3.332 0-6.033-2.701-6.033-6.032s2.701-6.032 6.033-6.032c1.498 0 2.866 0.549 3.921 1.453l2.814-2.814c-1.784-1.667-4.166-2.685-6.735-2.685-5.522 0-10 4.477-10 10s4.478 10 10 10c8.396 0 10-7.524 10-10 0-0.67-0.069-1.325-0.189-1.955h-9.811z"/></svg>') center/contain no-repeat;
+            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.545 10.239v3.821h5.445c-0.712 2.315-2.647 3.972-5.445 3.972-3.332 0-6.033-2.701-6.033-6.032s2.701-6.032 6.033-6.032c1.498 0 2.866 0.549 3.921 1.453l2.814-2.814c-1.784-1.667-4.166-2.685-6.735-2.685-5.522 0-10 4.477-10 10s4.478 10 10 10c8.396 0 10-7.524 10-10 0-0.67-0.069-1.325-0.189-1.955h-9.811z"/></svg>') center/contain no-repeat;
+        }
+
+        .btn-google span {
+            margin-left: 30px;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        body.light-mode .auth-footer {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-mode .theme-toggle {
+            color: var(--dark);
+        }
+
+        body.light-mode .theme-toggle:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .password-strength {
+            margin-top: 5px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        body.light-mode .password-strength {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        body.light-mode .divider {
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        body.light-mode .divider::before,
+        body.light-mode .divider::after {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .divider::before {
+            margin-right: 10px;
+        }
+
+        .divider::after {
+            margin-left: 10px;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        body.light-mode .loading-spinner {
+            border: 3px solid rgba(0,0,0,.1);
+            border-top-color: var(--dark);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .auth-container {
+                padding: 30px;
+                max-width: 90%;
+            }
+            
+            .auth-logo {
+                font-size: 1.5rem;
+            }
+            
+            .auth-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            body {
+                padding: 15px;
+            }
+            
+            .auth-container {
+                padding: 25px 20px;
+            }
+            
+            .auth-logo {
+                font-size: 1.4rem;
+                margin-bottom: 10px;
+            }
+            
+            .auth-title {
+                font-size: 1.2rem;
+                margin-bottom: 8px;
+            }
+            
+            .auth-subtitle {
+                font-size: 0.85rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .auth-form input {
+                padding: 10px 12px;
+                font-size: 0.95rem;
+            }
+            
+            .theme-toggle {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .auth-container {
+                padding: 20px 15px;
+            }
+            
+            .auth-logo {
+                font-size: 1.3rem;
+            }
+            
+            .auth-title {
+                font-size: 1.1rem;
+            }
+            
+            .auth-footer {
+                font-size: 0.8rem;
+            }
+            
+            .divider {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="auth-container">
+        <div class="auth-header">
+            <a href="index.html" class="auth-logo">
+                <i class="fas fa-robot"></i>
+                <span>AI Doctor</span>
+            </a>
+            <h2 class="auth-title">Create Account</h2>
+            <p class="auth-subtitle">Join our AI health assistant community</p>
+        </div>
+
+        <form class="auth-form" id="signupForm">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Create a password" required>
+                <div class="password-strength">Use 8+ characters with a mix of letters, numbers & symbols</div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Sign Up
+            </button>
+        </form>
+
+        <div class="divider">or continue with</div>
+
+        <button class="btn btn-google" id="googleSignUp">
+            <div class="google-icon-wrapper">
+                <div class="google-icon"></div>
+            </div>
+            <span>Sign up with Google</span>
+        </button>
+
+        <div class="auth-footer">
+            Already have an account? <a href="login.html">Log in</a>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBXe8bAEIVVRCen2dXWp2dELEUazcq3pzw",
+            authDomain: "document-maker-1464.firebaseapp.com",
+            projectId: "document-maker-1464",
+            storageBucket: "document-maker-1464.appspot.com",
+            messagingSenderId: "1099330260079",
+            appId: "1:1099330260079:web:b5eca7375749f9da42919a",
+            measurementId: "G-9PNZ3RL46R"
+        };
+    
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const provider = new firebase.auth.GoogleAuthProvider();
+    
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        
+        function setupThemeToggle() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                const icon = themeToggle.querySelector('i');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+    
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                const icon = themeToggle.querySelector('i');
+                
+                if (document.body.classList.contains('light-mode')) {
+                    localStorage.setItem('theme', 'light');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    localStorage.setItem('theme', 'dark');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            });
+        }
+    
+        // Email/Password Sign Up
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const signupBtn = document.querySelector('#signupForm .btn-primary');
+            
+            // Simple validation
+            if (!fullName || !email || !password || !confirmPassword) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters');
+                return;
+            }
+            
+            // Show loading state
+            signupBtn.innerHTML = '<div class="loading-spinner"></div> Creating account...';
+            signupBtn.disabled = true;
+            
+            // Firebase signup
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed up successfully
+                    const user = userCredential.user;
+                    
+                    // Update user profile with display name
+                    return user.updateProfile({
+                        displayName: fullName
+                    });
+                })
+                .then(() => {
+                    // Redirect to main page
+                    window.location.href = 'index.html';
+                })
+                .catch((error) => {
+                    // Reset button state
+                    signupBtn.innerHTML = '<i class="fas fa-user-plus"></i> Sign Up';
+                    signupBtn.disabled = false;
+                    
+                    // Handle errors
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    
+                    let friendlyMessage = "Signup failed. Please try again.";
+                    if (errorCode === "auth/email-already-in-use") {
+                        friendlyMessage = "This email is already registered.";
+                    } else if (errorCode === "auth/invalid-email") {
+                        friendlyMessage = "Invalid email format.";
+                    } else if (errorCode === "auth/weak-password") {
+                        friendlyMessage = "Password should be at least 6 characters.";
+                    }
+                    
+                    alert(friendlyMessage);
+                });
+        });
+    
+        // Google Sign-Up
+        document.getElementById('googleSignUp').addEventListener('click', function(e) {
+            e.preventDefault();
+            const googleBtn = document.getElementById('googleSignUp');
+            
+            // Show loading state
+            googleBtn.innerHTML = `
+                <div class="google-icon-wrapper">
+                    <div class="loading-spinner"></div>
+                </div>
+                <span>Signing up...</span>
+            `;
+            googleBtn.disabled = true;
+            
+            // Sign in with Google
+            auth.signInWithPopup(provider)
+                .then((result) => {
+                    // This gives you a Google Access Token
+                    const credential = result.credential;
+                    const token = credential.accessToken;
+                    
+                    // The signed-in user info
+                    const user = result.user;
+                    window.location.href = 'index.html';
+                })
+                .catch((error) => {
+                    // Reset button state
+                    googleBtn.innerHTML = `
+                        <div class="google-icon-wrapper">
+                            <div class="google-icon"></div>
+                        </div>
+                        <span>Sign up with Google</span>
+                    `;
+                    googleBtn.disabled = false;
+                    
+                    // Handle Errors
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    const email = error.email;
+                    const credential = error.credential;
+                    
+                    let friendlyMessage = "Google sign-up failed. Please try again.";
+                    if (errorCode === 'auth/account-exists-with-different-credential') {
+                        friendlyMessage = "An account already exists with this email. Try signing in instead.";
+                    } else if (errorCode === 'auth/popup-closed-by-user') {
+                        friendlyMessage = "Sign-up popup was closed before completing.";
+                    } else if (errorCode === 'auth/cancelled-popup-request') {
+                        friendlyMessage = "Sign-up process was cancelled.";
+                    } else if (errorCode === 'auth/popup-blocked') {
+                        friendlyMessage = "Popup was blocked by your browser. Please allow popups for this site.";
+                    }
+                    
+                    alert(friendlyMessage);
+                });
+        });
+    
+        // Initialize
+        document.addEventListener('DOMContentLoaded', setupThemeToggle);
+    </script>
+</body>
+</html>

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Doctor - Login</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #3a7bd5;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f8f9fa;
+            --danger: #ff4757;
+            --success: #2ed573;
+            --warning: #ffa502;
+            --glass: rgba(255, 255, 255, 0.05);
+            --neon-glow: 0 0 10px rgba(0, 210, 255, 0.8);
+            --transition: all 0.3s ease;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            transition: var(--transition);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(58, 123, 213, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 210, 255, 0.1) 0%, transparent 20%);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        body.light-mode {
+            background-color: var(--light);
+            color: var(--dark);
+            --glass: rgba(0, 0, 0, 0.05);
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 450px;
+            min-width: 300px;
+            padding: 40px;
+            background: var(--glass);
+            border-radius: var(--border-radius-lg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body.light-mode .auth-container {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-container:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+
+        .auth-logo:hover {
+            transform: translateY(-3px);
+        }
+
+        .auth-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .auth-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        body.light-mode .auth-subtitle {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .auth-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .auth-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: var(--primary);
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        body.light-mode .auth-form input {
+            color: var(--dark);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 210, 255, 0.2);
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: var(--border-radius-lg);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: var(--neon-glow);
+            margin-top: 10px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+        }
+
+        .btn-google {
+            background: white;
+            color: #5F6368;
+            border: 1px solid #DADCE0;
+            margin-top: 15px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            height: 44px;
+        }
+
+        .btn-google:hover {
+            background: #F8F9FA;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-color: #D2E3FC;
+        }
+
+        .btn-google:active {
+            background: #F1F3F4;
+        }
+
+        .google-icon-wrapper {
+            position: absolute;
+            left: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #DADCE0;
+        }
+
+        .google-icon {
+            width: 18px;
+            height: 18px;
+            background: conic-gradient(
+                from -45deg, 
+                #EA4335 110deg, 
+                #FBBC05 110deg 180deg, 
+                #34A853 180deg 270deg, 
+                #4285F4 270deg
+            );
+            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.545 10.239v3.821h5.445c-0.712 2.315-2.647 3.972-5.445 3.972-3.332 0-6.033-2.701-6.033-6.032s2.701-6.032 6.033-6.032c1.498 0 2.866 0.549 3.921 1.453l2.814-2.814c-1.784-1.667-4.166-2.685-6.735-2.685-5.522 0-10 4.477-10 10s4.478 10 10 10c8.396 0 10-7.524 10-10 0-0.67-0.069-1.325-0.189-1.955h-9.811z"/></svg>') center/contain no-repeat;
+            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.545 10.239v3.821h5.445c-0.712 2.315-2.647 3.972-5.445 3.972-3.332 0-6.033-2.701-6.033-6.032s2.701-6.032 6.033-6.032c1.498 0 2.866 0.549 3.921 1.453l2.814-2.814c-1.784-1.667-4.166-2.685-6.735-2.685-5.522 0-10 4.477-10 10s4.478 10 10 10c8.396 0 10-7.524 10-10 0-0.67-0.069-1.325-0.189-1.955h-9.811z"/></svg>') center/contain no-repeat;
+        }
+
+        .btn-google span {
+            margin-left: 30px;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        body.light-mode .auth-footer {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-mode .theme-toggle {
+            color: var(--dark);
+        }
+
+        body.light-mode .theme-toggle:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: right;
+            margin-top: 5px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        body.light-mode .forgot-password {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .forgot-password a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        body.light-mode .divider {
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        body.light-mode .divider::before,
+        body.light-mode .divider::after {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .divider::before {
+            margin-right: 10px;
+        }
+
+        .divider::after {
+            margin-left: 10px;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        body.light-mode .loading-spinner {
+            border: 3px solid rgba(0,0,0,.1);
+            border-top-color: var(--dark);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .auth-container {
+                padding: 30px;
+                max-width: 100%;
+            }
+            
+            body {
+                padding: 15px;
+                align-items: flex-start;
+            }
+            
+            .auth-logo {
+                font-size: 1.5rem;
+            }
+            
+            .auth-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 25px 20px;
+                border-radius: var(--border-radius-md);
+            }
+            
+            .auth-logo {
+                font-size: 1.3rem;
+            }
+            
+            .auth-title {
+                font-size: 1.2rem;
+            }
+            
+            .auth-subtitle {
+                font-size: 0.85rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .btn-google span {
+                margin-left: 25px;
+                font-size: 0.85rem;
+            }
+            
+            .google-icon-wrapper {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .google-icon {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .theme-toggle {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .auth-container {
+                padding: 20px 15px;
+            }
+            
+            .auth-logo {
+                font-size: 1.2rem;
+            }
+            
+            .btn-google span {
+                margin-left: 20px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="auth-container">
+        <div class="auth-header">
+            <a href="index.html" class="auth-logo">
+                <i class="fas fa-robot"></i>
+                <span>AI Doctor</span>
+            </a>
+            <h2 class="auth-title">Welcome Back</h2>
+            <p class="auth-subtitle">Sign in to access your AI health assistant</p>
+        </div>
+
+        <form class="auth-form" id="loginForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+        </form>
+
+        <div class="divider">or continue with</div>
+
+        <button class="btn btn-google" id="googleSignIn">
+            <div class="google-icon-wrapper">
+                <div class="google-icon"></div>
+            </div>
+            <span>Sign in with Google</span>
+        </button>
+
+        <div class="auth-footer">
+            Don't have an account? <a href="signup.html">Sign up</a>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBXe8bAEIVVRCen2dXWp2dELEUazcq3pzw",
+            authDomain: "document-maker-1464.firebaseapp.com",
+            projectId: "document-maker-1464",
+            storageBucket: "document-maker-1464.appspot.com",
+            messagingSenderId: "1099330260079",
+            appId: "1:1099330260079:web:b5eca7375749f9da42919a",
+            measurementId: "G-9PNZ3RL46R"
+        };
+    
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const provider = new firebase.auth.GoogleAuthProvider();
+    
+        // Theme Toggle
+        function setupThemeToggle() {
+            const themeToggle = document.getElementById('themeToggle');
+            if (!themeToggle) return;
+            
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                const icon = themeToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+            }
+    
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                const icon = themeToggle.querySelector('i');
+                
+                if (document.body.classList.contains('light-mode')) {
+                    localStorage.setItem('theme', 'light');
+                    if (icon) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    }
+                } else {
+                    localStorage.setItem('theme', 'dark');
+                    if (icon) {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    }
+                }
+            });
+        }
+    
+        // Initialize all event listeners
+        function initializeApp() {
+            setupThemeToggle();
+            
+            // Email/Password Login
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    const loginBtn = document.querySelector('#loginForm .btn-primary');
+                    
+                    if (!email || !password || !loginBtn) return;
+                    
+                    // Show loading state
+                    loginBtn.innerHTML = '<div class="loading-spinner"></div> Signing in...';
+                    loginBtn.disabled = true;
+                    
+                    // Firebase login
+                    auth.signInWithEmailAndPassword(email, password)
+                        .then((userCredential) => {
+                            window.location.href = 'index.html';
+                        })
+                        .catch((error) => {
+                            // Reset button state
+                            loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+                            loginBtn.disabled = false;
+                            
+                            // Handle errors
+                            let friendlyMessage = "Login failed. Please try again.";
+                            switch(error.code) {
+                                case "auth/invalid-email":
+                                    friendlyMessage = "Invalid email format.";
+                                    break;
+                                case "auth/user-not-found":
+                                    friendlyMessage = "No account found with this email.";
+                                    break;
+                                case "auth/wrong-password":
+                                    friendlyMessage = "Incorrect password.";
+                                    break;
+                                case "auth/too-many-requests":
+                                    friendlyMessage = "Too many attempts. Account temporarily locked. Try again later or reset your password.";
+                                    break;
+                            }
+                            
+                            alert(friendlyMessage);
+                        });
+                });
+            }
+            
+            // Google Sign-In
+            const googleSignIn = document.getElementById('googleSignIn');
+            if (googleSignIn) {
+                googleSignIn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Show loading state
+                    googleSignIn.innerHTML = `
+                        <div class="google-icon-wrapper">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <span>Signing in...</span>
+                    `;
+                    googleSignIn.disabled = true;
+                    
+                    // Sign in with Google
+                    auth.signInWithPopup(provider)
+                        .then(() => {
+                            window.location.href = 'index.html';
+                        })
+                        .catch((error) => {
+                            // Reset button state
+                            googleSignIn.innerHTML = `
+                                <div class="google-icon-wrapper">
+                                    <div class="google-icon"></div>
+                                </div>
+                                <span>Sign in with Google</span>
+                            `;
+                            googleSignIn.disabled = false;
+                            
+                            // Handle Errors
+                            let friendlyMessage = "Google sign-in failed. Please try again.";
+                            switch(error.code) {
+                                case 'auth/account-exists-with-different-credential':
+                                    friendlyMessage = "An account already exists with this email. Try signing in with email/password.";
+                                    break;
+                                case 'auth/popup-closed-by-user':
+                                    friendlyMessage = "Sign-in popup was closed before completing.";
+                                    break;
+                                case 'auth/cancelled-popup-request':
+                                    friendlyMessage = "Sign-in process was cancelled.";
+                                    break;
+                                case 'auth/popup-blocked':
+                                    friendlyMessage = "Popup was blocked by your browser. Please allow popups for this site.";
+                                    break;
+                            }
+                            
+                            alert(friendlyMessage);
+                        });
+                });
+            }
+            
+            // Forgot password functionality
+            const forgotPasswordLink = document.querySelector('.forgot-password a');
+            if (forgotPasswordLink) {
+                forgotPasswordLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const email = document.getElementById('email').value || prompt("Please enter your email address to reset your password:");
+                    
+                    if (email) {
+                        auth.sendPasswordResetEmail(email)
+                            .then(() => {
+                                alert("Password reset email sent. Please check your inbox.");
+                            })
+                            .catch((error) => {
+                                let friendlyMessage = "Error sending reset email.";
+                                if (error.code === "auth/user-not-found") {
+                                    friendlyMessage = "No account found with this email.";
+                                } else if (error.code === "auth/invalid-email") {
+                                    friendlyMessage = "Invalid email address.";
+                                }
+                                alert(friendlyMessage);
+                            });
+                    }
+                });
+            }
+        }
+    
+        // Wait for DOM to be fully loaded before initializing
+        document.addEventListener('DOMContentLoaded', initializeApp);
+    </script>
+</body>
+</html>

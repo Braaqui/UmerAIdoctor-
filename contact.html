@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - AI Doctor | Your Intelligent Health Companion</title>
+    <meta name="description" content="Get in touch with AI Doctor for support, technical assistance, or general inquiries. Our team is ready to help you with your healthcare AI needs.">
+    <meta name="keywords" content="AI Doctor, healthcare AI, medical assistant, health technology, telemedicine">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --primary-light: #6ae0ff;
+            --secondary: #3a7bd5;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f8f9fa;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-light: rgba(255, 255, 255, 0.1);
+            --transition: all 0.3s ease;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 20px;
+            --success: #2ed573;
+            --error: #ff4757;
+            --warning: #ffa502;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            transition: var(--transition);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(58, 123, 213, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 210, 255, 0.1) 0%, transparent 20%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.light-mode {
+            background-color: var(--light);
+            color: var(--dark);
+            --glass: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Skip to content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary);
+            color: white;
+            padding: 8px;
+            z-index: 1000;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Navigation */
+        .navbar {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--glass);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(18, 18, 18, 0.9);
+            box-shadow: var(--shadow-sm);
+        }
+
+        body.light-mode .navbar {
+            background-color: rgba(248, 249, 250, 0.9);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 8px 12px;
+            border-radius: var(--border-radius-sm);
+        }
+
+        body.light-mode .nav-links a {
+            color: var(--dark);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+            background: var(--glass-light);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        body.light-mode .mobile-menu-btn {
+            color: var(--dark);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: var(--border-radius-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        body.light-mode .theme-toggle {
+            color: var(--dark);
+        }
+
+        .theme-toggle:hover {
+            background: var(--glass-light);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .content-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--glass);
+            border-radius: var(--border-radius-lg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow-lg);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body.light-mode .content-container {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 30px 0 20px;
+            font-size: 1.5rem;
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contact-info {
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-md);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        body.light-mode .contact-info {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-info:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+
+        .contact-info:hover .contact-icon {
+            transform: scale(1.1);
+        }
+
+        .contact-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        body.light-mode .contact-info p {
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        .contact-link {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .contact-link:hover {
+            text-decoration: underline;
+            color: var(--primary-light);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            margin-top: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: var(--border-radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        body.light-mode .form-control {
+            color: var(--dark);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: var(--border-radius-sm);
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .success {
+            background-color: rgba(46, 213, 115, 0.2);
+            border: 1px solid rgba(46, 213, 115, 0.5);
+            color: var(--success);
+        }
+
+        .error {
+            background-color: rgba(255, 71, 87, 0.2);
+            border: 1px solid rgba(255, 71, 87, 0.5);
+            color: var(--error);
+        }
+
+        .warning {
+            background-color: rgba(255, 165, 2, 0.2);
+            border: 1px solid rgba(255, 165, 2, 0.5);
+            color: var(--warning);
+        }
+
+        .loading {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-top: 1px solid var(--glass);
+        }
+
+        body.light-mode .footer {
+            color: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.03);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer .logo {
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            max-width: 600px;
+            margin: 0 auto 20px;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+            color: var(--primary-light);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: var(--light);
+            background: var(--glass);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        body.light-mode .social-links a {
+            color: var(--dark);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Loading spinner for form submission */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+        }
+
+        body.light-mode .spinner {
+            border-top-color: var(--primary);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: rgba(18, 18, 18, 0.95);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 30px;
+                gap: 25px;
+                transition: var(--transition);
+                z-index: 99;
+            }
+
+            body.light-mode .nav-links {
+                background-color: rgba(248, 249, 250, 0.95);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .auth-buttons {
+                margin-left: auto;
+                margin-right: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 20px;
+                margin: 20px;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            .footer {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .content-container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                gap: 15px;
+            }
+
+            .footer {
+                padding: 25px 15px;
+            }
+        }
+
+        /* Accessibility improvements */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Focus styles for keyboard navigation */
+        a:focus-visible, 
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+            box-shadow: var(--shadow-md);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-robot" aria-hidden="true"></i>
+                <span>AI Doctor</span>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">
+                    <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                    <span class="sr-only">Toggle dark mode</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <main id="main-content">
+            <div class="content-container">
+                <h1>Contact Us</h1>
+                <p>Have questions, suggestions, or need support? We're here to help! Our team typically responds within 24 hours.</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                        </div>
+                        <h3>Email Support</h3>
+                        <p>For general inquiries and support, email us at:</p>
+                        <a href="mailto:support@aidoc.example" class="contact-link">support@aidoc.example</a>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <div class="contact-icon">
+                            <i class="fas fa-headset" aria-hidden="true"></i>
+                        </div>
+                        <h3>Technical Support</h3>
+                        <p>Need technical assistance? Our team is ready to help:</p>
+                        <a href="mailto:tech@aidoc.example" class="contact-link">tech@aidoc.example</a>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                        </div>
+                        <h3>Our Office</h3>
+                        <p>123 Health Tech Way<br>San Francisco, CA 94107<br>United States</p>
+                        <a href="https://maps.google.com" class="contact-link" target="_blank" rel="noopener noreferrer">View on Map</a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h2>Send Us a Message</h2>
+                    <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+                    <form method="POST" id="contactForm">
+                        <input type="hidden" name="access_key" value="210f7457-3bfa-421d-b334-85be2dbb58da">
+                        <input type="hidden" name="subject" value="New Contact Form Submission from AI Doctor">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                        
+                        <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" name="name" class="form-control" required aria-required="true">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" class="form-control" required aria-required="true">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number (Optional)</label>
+                            <input type="tel" id="phone" name="phone" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="department">Department</label>
+                            <select id="department" name="department" class="form-control">
+                                <option value="">Select a department</option>
+                                <option value="support">General Support</option>
+                                <option value="technical">Technical Support</option>
+                                <option value="sales">Sales Inquiry</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Message *</label>
+                            <textarea id="message" name="message" class="form-control" required aria-required="true"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i> Send Message
+                        </button>
+                        
+                        <div id="result" role="alert"></div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-robot" aria-hidden="true"></i>
+                <span>AI Doctor</span>
+            </a>
+            <p>Your intelligent health companion powered by artificial intelligence.</p>
+            
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="faq.html">FAQs</a>
+                <a href="about.html">About</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            
+            <p style="margin-top: 30px;">&copy; <span id="currentYear"></span> AI Doctor. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = ''; // Re-enable scrolling
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = ''; // Re-enable scrolling
+            });
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        
+        function setupThemeToggle() {
+            // Check for saved theme preference or use system preference
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'light' || (!savedTheme && !systemPrefersDark)) {
+                document.body.classList.add('light-mode');
+                const icon = themeToggle.querySelector('i');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                const icon = themeToggle.querySelector('i');
+                
+                if (document.body.classList.contains('light-mode')) {
+                    localStorage.setItem('theme', 'light');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    localStorage.setItem('theme', 'dark');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            });
+        }
+        
+        // Form Submission with improved validation
+        const contactForm = document.getElementById('contactForm');
+        const result = document.getElementById('result');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple validation
+            const name = contactForm.elements['name'].value.trim();
+            const email = contactForm.elements['email'].value.trim();
+            const message = contactForm.elements['message'].value.trim();
+            
+            if (!name || !email || !message) {
+                showResult("Please fill in all required fields.", "error");
+                return;
+            }
+            
+            // Validate email format
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showResult("Please enter a valid email address.", "error");
+                return;
+            }
+            
+            const formData = new FormData(contactForm);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+            
+            showResult("<span class='spinner'></span> Please wait...", "loading");
+
+            // Disable submit button during submission
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = "<span class='spinner'></span> Sending...";
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    showResult("Form submitted successfully! We'll contact you soon.", "success");
+                    contactForm.reset();
+                } else {
+                    console.log(response);
+                    showResult(json.message || "Error submitting form", "error");
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                showResult("Something went wrong! Please try again later.", "error");
+            })
+            .finally(function() {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = "<i class='fas fa-paper-plane'></i> Send Message";
+            });
+        });
+
+        function showResult(message, type) {
+            const icon = type === "success" ? "fa-check-circle" : 
+                         type === "error" ? "fa-exclamation-circle" : "";
+            
+            result.innerHTML = icon ? `<i class="fas ${icon}"></i> ${message}` : message;
+            result.className = "";
+            result.classList.add(type);
+            result.style.display = "block";
+            
+            if (type !== "loading") {
+                setTimeout(() => {
+                    result.style.display = "none";
+                }, 5000);
+            }
+        }
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Initialize theme toggle and other functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            setupThemeToggle();
+            
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Improved phone number input validation
+            const phoneInput = document.getElementById('phone');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    // Allow only numbers, spaces, parentheses, and dashes
+                    this.value = this.value.replace(/[^0-9\s\-\(\)]/g, '');
+                });
+            }
+        });
+
+
+
+
+
+        
+
+
+    </script>
+</body>
+</html>

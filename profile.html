@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - AI Doctor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --primary-light: #6ae0ff;
+            --primary-dark: #00a3cc;
+            --secondary: #3a7bd5;
+            --primary-rgb: 0, 210, 255;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --dark-gray: #1e1e1e;
+            --light: #f8f9fa;
+            --light-gray: #e9ecef;
+            --danger: #ff4757;
+            --danger-light: #ff6b81;
+            --success: #2ed573;
+            --success-light: #7bed9f;
+            --warning: #ffa502;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-light: rgba(255, 255, 255, 0.1);
+            --neon-glow: 0 0 10px rgba(0, 210, 255, 0.8);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
+            --shadow-inset: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            transition: var(--transition);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(58, 123, 213, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 210, 255, 0.1) 0%, transparent 20%);
+            background-attachment: fixed;
+        }
+
+        body.light-mode {
+            background-color: var(--light);
+            color: var(--dark);
+            --glass: rgba(0, 0, 0, 0.05);
+            --glass-light: rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--glass);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(18, 18, 18, 0.9);
+            box-shadow: var(--shadow-sm);
+        }
+
+        body.light-mode header {
+            background-color: rgba(248, 249, 250, 0.9);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        /* Auth Buttons Styles */
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: var(--border-radius-md);
+            transition: var(--transition);
+        }
+
+        .user-profile:hover {
+            background: var(--glass-light);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: var(--glass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-name {
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+        }
+
+        .btn {
+            position: relative;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            text-decoration: none;
+            min-width: 100px;
+            text-align: center;
+            overflow: hidden;
+            border: none;
+            outline: none;
+            z-index: 1;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.3);
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.3);
+        }
+
+        .btn-danger {
+            background: transparent;
+            color: var(--danger);
+            border: 2px solid var(--danger);
+        }
+
+        .btn-danger:hover {
+            background: var(--danger);
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 71, 87, 0.3);
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            min-width: auto;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.light-mode .theme-toggle {
+            color: var(--dark);
+        }
+
+        .theme-toggle:hover {
+            background: var(--glass-light);
+            transform: rotate(30deg);
+        }
+
+        /* Profile Page Styles */
+        .profile-container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: var(--glass);
+            border-radius: var(--border-radius-lg);
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body.light-mode .profile-container {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            overflow: hidden;
+            border: 4px solid var(--primary);
+            background: var(--glass);
+            position: relative;
+            transition: var(--transition);
+            box-shadow: 0 0 20px rgba(var(--primary-rgb), 0.3);
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(var(--primary-rgb), 0.5);
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-fallback {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .profile-header h1 {
+            margin: 10px 0 5px;
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            word-break: break-word;
+        }
+
+        .profile-header p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+            font-size: 1rem;
+            word-break: break-all;
+        }
+
+        body.light-mode .profile-header p {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .profile-details {
+            margin: 30px 0;
+        }
+
+        .detail-section {
+            margin-bottom: 25px;
+        }
+
+        .detail-section h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        body.light-mode .detail-section h2 {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-sm);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: var(--primary);
+            transition: var(--transition);
+            opacity: 0;
+        }
+
+        .detail-item:hover::before {
+            opacity: 1;
+        }
+
+        body.light-mode .detail-item {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .detail-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-sm);
+            background: var(--glass-light);
+        }
+
+        .detail-item i {
+            width: 35px;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .detail-item-content {
+            flex: 1;
+        }
+
+        .detail-item h3 {
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .detail-item p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+        }
+
+        body.light-mode .detail-item p {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* Edit Form Styles */
+        .edit-form {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-md);
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body.light-mode .edit-form {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: var(--border-radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        body.light-mode .form-control {
+            color: var(--dark);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-mode .form-control:focus {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        /* Verification Badge */
+        .verification-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(46, 213, 115, 0.1);
+            color: var(--success);
+            padding: 3px 8px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            margin-left: 5px;
+            font-weight: 500;
+        }
+
+        /* Loading Spinner */
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 250px;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--dark-gray);
+            color: white;
+            padding: 12px 16px;
+            border-radius: var(--border-radius-sm);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+            max-width: 300px;
+        }
+
+        body.light-mode .toast {
+            background: white;
+            color: var(--dark);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .toast.error {
+            border-left: 4px solid var(--danger);
+        }
+
+        .toast.warning {
+            border-left: 4px solid var(--warning);
+        }
+
+        .toast i {
+            font-size: 1.1rem;
+        }
+
+        .toast.success i {
+            color: var(--success);
+        }
+
+        .toast.error i {
+            color: var(--danger);
+        }
+
+        .toast.warning i {
+            color: var(--warning);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background: var(--dark);
+            padding: 25px;
+            border-radius: var(--border-radius-lg);
+            max-width: 450px;
+            width: 90%;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            transform: scale(0.9);
+            transition: var(--transition);
+            border: 1px solid var(--glass-light);
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+
+        body.light-mode .modal-content {
+            background: var(--light);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-modal:hover {
+            background: var(--glass-light);
+            transform: rotate(90deg);
+        }
+
+        body.light-mode .close-modal {
+            color: var(--dark);
+        }
+
+        .modal-title {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .modal-message {
+            margin-bottom: 15px;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        /* Password Strength Indicator */
+        .password-strength {
+            margin-top: 5px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .strength-meter {
+            height: 100%;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .strength-weak {
+            background-color: var(--danger);
+        }
+
+        .strength-medium {
+            background-color: var(--warning);
+        }
+
+        .strength-strong {
+            background-color: var(--success);
+        }
+
+        .password-hint {
+            font-size: 0.75rem;
+            margin-top: 5px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        body.light-mode .password-hint {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .profile-container {
+                padding: 25px;
+            }
+            
+            .profile-avatar {
+                width: 110px;
+                height: 110px;
+            }
+            
+            .profile-header h1 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .profile-container {
+                padding: 20px;
+                margin: 15px auto;
+            }
+            
+            .profile-avatar {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .profile-header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .profile-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .detail-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .detail-item i {
+                margin-bottom: 8px;
+                width: 100%;
+            }
+
+            .header-content {
+                justify-content: center;
+            }
+
+            .logo {
+                margin-bottom: 10px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .modal-content {
+                padding: 20px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions .btn {
+                width: 100%;
+            }
+
+            .toast {
+                max-width: 250px;
+                font-size: 0.9rem;
+                padding: 10px 14px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .profile-avatar {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .profile-header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .profile-header p {
+                font-size: 0.9rem;
+            }
+            
+            .detail-section h2 {
+                font-size: 1.1rem;
+            }
+            
+            .detail-item {
+                padding: 10px;
+            }
+            
+            .detail-item h3 {
+                font-size: 0.9rem;
+            }
+            
+            .detail-item p {
+                font-size: 0.8rem;
+            }
+
+            .modal-content {
+                padding: 15px;
+            }
+
+            .modal-title {
+                font-size: 1.2rem;
+            }
+
+            .modal-message {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .user-name {
+                max-width: 100px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .profile-avatar {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .profile-header h1 {
+                font-size: 1.2rem;
+            }
+            
+            .profile-container {
+                padding: 15px;
+            }
+            
+            .auth-buttons {
+                gap: 8px;
+            }
+            
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+
+            .user-profile {
+                gap: 8px;
+                padding: 3px 6px;
+            }
+
+            .user-name {
+                max-width: 80px;
+                font-size: 0.9rem;
+            }
+
+            .user-avatar {
+                width: 35px;
+                height: 35px;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>AI Doctor</span>
+                </a>
+                <div class="auth-buttons" id="authButtons">
+                    <!-- Auth buttons will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="profile-container" id="profileContainer">
+            <!-- Profile content will be inserted here by JavaScript -->
+            <div class="loading-container" id="loadingContainer">
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toastNotification"></div>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closePasswordModal">&times;</button>
+            <h2 class="modal-title">Change Password</h2>
+            <form id="passwordForm">
+                <div class="form-group">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" class="form-control" required>
+                    <div class="password-strength">
+                        <div class="strength-meter" id="strengthMeter"></div>
+                    </div>
+                    <div class="password-hint">Password must be at least 8 characters long</div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmNewPassword">Confirm New Password</label>
+                    <input type="password" id="confirmNewPassword" class="form-control" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="cancelPasswordChange">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Account Modal -->
+    <div class="modal" id="deleteAccountModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeDeleteModal">&times;</button>
+            <h2 class="modal-title">Delete Account</h2>
+            <p class="modal-message">Are you sure you want to delete your account? This action cannot be undone. All your data will be permanently removed.</p>
+            <form id="deleteAccountForm">
+                <div class="form-group">
+                    <label for="deletePassword">Enter your password to confirm</label>
+                    <input type="password" id="deletePassword" class="form-control" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="cancelDelete">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Delete Account Permanently</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Picture Upload Modal -->
+    <div class="modal" id="uploadPhotoModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeUploadModal">&times;</button>
+            <h2 class="modal-title">Update Profile Picture</h2>
+            <div id="imagePreviewContainer" style="display: none; margin-bottom: 15px; text-align: center;">
+                <img id="imagePreview" src="#" alt="Preview" style="max-width: 180px; max-height: 180px; border-radius: var(--border-radius-md);">
+            </div>
+            <form id="uploadPhotoForm">
+                <div class="form-group">
+                    <label for="profilePhoto">Select an image</label>
+                    <input type="file" id="profilePhoto" class="form-control" accept="image/*" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="cancelUpload">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Upload Photo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBXe8bAEIVVRCen2dXWp2dELEUazcq3pzw",
+            authDomain: "document-maker-1464.firebaseapp.com",
+            projectId: "document-maker-1464",
+            storageBucket: "document-maker-1464.appspot.com",
+            messagingSenderId: "1099330260079",
+            appId: "1:1099330260079:web:b5eca7375749f9da42919a",
+            measurementId: "G-9PNZ3RL46R"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const storage = firebase.storage();
+
+        // DOM Elements
+        const authButtons = document.getElementById('authButtons');
+        const profileContainer = document.getElementById('profileContainer');
+        const loadingContainer = document.getElementById('loadingContainer');
+        const toastNotification = document.getElementById('toastNotification');
+        
+        // Password modal elements
+        const changePasswordModal = document.getElementById('changePasswordModal');
+        const closePasswordModal = document.getElementById('closePasswordModal');
+        const cancelPasswordChange = document.getElementById('cancelPasswordChange');
+        const passwordForm = document.getElementById('passwordForm');
+        const strengthMeter = document.getElementById('strengthMeter');
+        
+        // Delete account modal elements
+        const deleteAccountModal = document.getElementById('deleteAccountModal');
+        const closeDeleteModal = document.getElementById('closeDeleteModal');
+        const cancelDelete = document.getElementById('cancelDelete');
+        const deleteAccountForm = document.getElementById('deleteAccountForm');
+        
+        // Upload photo modal elements
+        const uploadPhotoModal = document.getElementById('uploadPhotoModal');
+        const closeUploadModal = document.getElementById('closeUploadModal');
+        const cancelUpload = document.getElementById('cancelUpload');
+        const uploadPhotoForm = document.getElementById('uploadPhotoForm');
+        const profilePhotoInput = document.getElementById('profilePhoto');
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+        const imagePreview = document.getElementById('imagePreview');
+
+        // Check authentication state
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in
+                renderAuthButtons(user);
+                renderProfile(user);
+                
+                // Check for saved theme preference
+                if (localStorage.getItem('theme') === 'light') {
+                    document.body.classList.add('light-mode');
+                    updateThemeIcon();
+                }
+            } else {
+                // User is signed out, redirect to login
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const icons = {
+                success: 'check-circle',
+                error: 'exclamation-circle',
+                warning: 'exclamation-triangle'
+            };
+            
+            toastNotification.innerHTML = `
+                <i class="fas fa-${icons[type]}"></i>
+                <span>${message}</span>
+            `;
+            toastNotification.className = `toast ${type} show`;
+            
+            setTimeout(() => {
+                toastNotification.classList.remove('show');
+            }, 5000);
+        }
+
+        // Render authentication buttons
+        function renderAuthButtons(user) {
+            authButtons.innerHTML = `
+                <div class="user-profile" onclick="window.location.href='profile.html'">
+                    <div class="user-avatar" style="background-color: ${getAvatarColor(user)}">
+                        ${user.photoURL ? 
+                            `<img src="${user.photoURL}" alt="${user.displayName || user.email}">` : 
+                            `<span>${getAvatarLetter(user)}</span>`}
+                    </div>
+                    <span class="user-name">${user.displayName || user.email || 'User'}</span>
+                </div>
+                <button class="btn btn-outline" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            `;
+
+            // Add event listeners
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        }
+
+        // Get avatar letter from user info
+        function getAvatarLetter(user) {
+            if (user.displayName) return user.displayName.charAt(0).toUpperCase();
+            if (user.email) return user.email.charAt(0).toUpperCase();
+            return 'U';
+        }
+
+        // Generate consistent color from user info
+        function getAvatarColor(user) {
+            const str = user.email || user.uid || 'user';
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = str.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            const hue = Math.abs(hash % 360);
+            return `hsl(${hue}, 70%, 60%)`;
+        }
+
+        // Render profile page
+        function renderProfile(user) {
+            loadingContainer.style.display = 'none';
+            
+            profileContainer.innerHTML = `
+                <div class="profile-header">
+                    ${renderUserAvatar(user)}
+                    <h1>${user.displayName || 'User'} ${user.emailVerified ? '<span class="verification-badge"><i class="fas fa-check-circle"></i> Verified</span>' : ''}</h1>
+                    <p>${user.email || ''}</p>
+                    ${!user.emailVerified ? `
+                    <button class="btn btn-sm btn-outline" onclick="sendVerificationEmail()" style="margin-top: 10px;">
+                        <i class="fas fa-envelope"></i> Verify Email
+                    </button>
+                    ` : ''}
+                </div>
+                
+                <div class="profile-details">
+                    <div class="detail-section">
+                        <h2><i class="fas fa-user-circle"></i> Account Information</h2>
+                        
+                        <div class="detail-item">
+                            <i class="fas fa-user"></i>
+                            <div class="detail-item-content">
+                                <h3>Display Name</h3>
+                                <p>${user.displayName || 'Not set'}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="detail-item-content">
+                                <h3>Email Address</h3>
+                                <p>${user.email || 'Not set'}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h2><i class="fas fa-chart-line"></i> Account Activity</h2>
+                        
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-plus"></i>
+                            <div class="detail-item-content">
+                                <h3>Account Created</h3>
+                                <p>${formatDate(user.metadata.creationTime)}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <div class="detail-item-content">
+                                <h3>Last Sign In</h3>
+                                <p>${formatDate(user.metadata.lastSignInTime)}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="edit-form" id="editForm">
+                        <h2><i class="fas fa-edit"></i> Edit Profile</h2>
+                        <form id="profileForm">
+                            <div class="form-group">
+                                <label for="editDisplayName">Display Name</label>
+                                <input type="text" id="editDisplayName" class="form-control" value="${user.displayName || ''}" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" onclick="cancelEdit()">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="profile-actions">
+                    <button class="btn btn-outline" onclick="showEditForm()">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                    ${user.providerData[0]?.providerId === 'password' ? `
+                    <button class="btn btn-outline" onclick="showChangePasswordModal()">
+                        <i class="fas fa-key"></i> Change Password
+                    </button>
+                    ` : ''}
+                    <button class="btn btn-primary" onclick="showUploadPhotoModal()">
+                        <i class="fas fa-camera"></i> Change Photo
+                    </button>
+                    <button class="btn btn-danger" onclick="showDeleteAccountModal()">
+                        <i class="fas fa-trash-alt"></i> Delete Account
+                    </button>
+                    <a href="index.html" class="btn btn-outline">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                </div>
+            `;
+
+            // Add form submit event
+            document.getElementById('profileForm')?.addEventListener('submit', saveProfileChanges);
+        }
+
+        // Format date for display
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Render user avatar
+        function renderUserAvatar(user) {
+            return `
+                <div class="profile-avatar" onclick="showUploadPhotoModal()" style="cursor: pointer">
+                    ${user.photoURL ? `
+                        <img src="${user.photoURL}" 
+                             alt="Profile" 
+                             class="profile-image"
+                             onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\"avatar-fallback\" style=\"background-color: ${getAvatarColor(user)}\">${getAvatarLetter(user)}</div>'">
+                    ` : `
+                        <div class="avatar-fallback" style="background-color: ${getAvatarColor(user)}">
+                            ${getAvatarLetter(user)}
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        // Profile actions
+        function showEditForm() {
+            document.getElementById('editForm').style.display = 'block';
+        }
+
+        function cancelEdit() {
+            document.getElementById('editForm').style.display = 'none';
+        }
+
+        function saveProfileChanges(e) {
+            e.preventDefault();
+            const user = auth.currentUser;
+            const newDisplayName = document.getElementById('editDisplayName').value;
+            
+            user.updateProfile({
+                displayName: newDisplayName
+            }).then(() => {
+                showToast('Profile updated successfully!');
+                renderProfile(user);
+                renderAuthButtons(user);
+                cancelEdit();
+            }).catch(error => {
+                showToast('Error updating profile: ' + error.message, 'error');
+            });
+        }
+
+        function showUploadPhotoModal() {
+            uploadPhotoModal.style.display = 'flex';
+            uploadPhotoModal.classList.add('show');
+            imagePreviewContainer.style.display = 'none';
+            uploadPhotoForm.reset();
+        }
+
+        function hideUploadPhotoModal() {
+            uploadPhotoModal.style.display = 'none';
+            uploadPhotoModal.classList.remove('show');
+        }
+
+        // Preview image before upload
+        profilePhotoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    imagePreview.src = event.target.result;
+                    imagePreviewContainer.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Handle photo upload
+        uploadPhotoForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const file = profilePhotoInput.files[0];
+            if (!file) return;
+            
+            const user = auth.currentUser;
+            const storageRef = storage.ref(`profile_pictures/${user.uid}`);
+            const uploadTask = storageRef.put(file);
+            
+            uploadTask.on('state_changed', 
+                (snapshot) => {
+                    // Progress monitoring could be added here
+                }, 
+                (error) => {
+                    showToast('Error uploading photo: ' + error.message, 'error');
+                }, 
+                () => {
+                    uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                        user.updateProfile({
+                            photoURL: downloadURL
+                        }).then(() => {
+                            showToast('Profile picture updated successfully!');
+                            renderProfile(user);
+                            renderAuthButtons(user);
+                            hideUploadPhotoModal();
+                        }).catch(error => {
+                            showToast('Error updating profile: ' + error.message, 'error');
+                        });
+                    });
+                }
+            );
+        });
+
+        function showChangePasswordModal() {
+            changePasswordModal.style.display = 'flex';
+            changePasswordModal.classList.add('show');
+            passwordForm.reset();
+            strengthMeter.style.width = '0%';
+            strengthMeter.className = 'strength-meter';
+        }
+
+        function hideChangePasswordModal() {
+            changePasswordModal.style.display = 'none';
+            changePasswordModal.classList.remove('show');
+            passwordForm.reset();
+        }
+
+        function showDeleteAccountModal() {
+            deleteAccountModal.style.display = 'flex';
+            deleteAccountModal.classList.add('show');
+            deleteAccountForm.reset();
+        }
+
+        function hideDeleteAccountModal() {
+            deleteAccountModal.style.display = 'none';
+            deleteAccountModal.classList.remove('show');
+            deleteAccountForm.reset();
+        }
+
+        function sendVerificationEmail() {
+            const user = auth.currentUser;
+            user.sendEmailVerification()
+                .then(() => {
+                    showToast('Verification email sent. Please check your inbox.');
+                })
+                .catch(error => {
+                    showToast('Error sending verification email: ' + error.message, 'error');
+                });
+        }
+
+        // Password strength indicator
+        document.getElementById('newPassword')?.addEventListener('input', function(e) {
+            const password = e.target.value;
+            let strength = 0;
+            
+            // Length check
+            if (password.length >= 8) strength += 1;
+            if (password.length >= 12) strength += 1;
+            
+            // Complexity checks
+            if (/[A-Z]/.test(password)) strength += 1;
+            if (/[0-9]/.test(password)) strength += 1;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+            
+            // Update meter
+            let width = 0;
+            let className = '';
+            
+            if (password.length === 0) {
+                width = 0;
+            } else if (strength <= 2) {
+                width = 33;
+                className = 'strength-weak';
+            } else if (strength <= 4) {
+                width = 66;
+                className = 'strength-medium';
+            } else {
+                width = 100;
+                className = 'strength-strong';
+            }
+            
+            strengthMeter.style.width = width + '%';
+            strengthMeter.className = 'strength-meter ' + className;
+        });
+
+        // Modal event listeners
+        closePasswordModal.addEventListener('click', hideChangePasswordModal);
+        cancelPasswordChange.addEventListener('click', hideChangePasswordModal);
+        closeDeleteModal.addEventListener('click', hideDeleteAccountModal);
+        cancelDelete.addEventListener('click', hideDeleteAccountModal);
+        closeUploadModal.addEventListener('click', hideUploadPhotoModal);
+        cancelUpload.addEventListener('click', hideUploadPhotoModal);
+
+        // Change password form
+        passwordForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = auth.currentUser;
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+
+            if (newPassword !== confirmNewPassword) {
+                showToast('New passwords do not match', 'error');
+                return;
+            }
+
+            if (newPassword.length < 8) {
+                showToast('Password must be at least 8 characters', 'error');
+                return;
+            }
+
+            // Reauthenticate user
+            const credential = firebase.auth.EmailAuthProvider.credential(
+                user.email, 
+                currentPassword
+            );
+
+            user.reauthenticateWithCredential(credential)
+                .then(() => {
+                    return user.updatePassword(newPassword);
+                })
+                .then(() => {
+                    showToast('Password changed successfully!');
+                    hideChangePasswordModal();
+                })
+                .catch(error => {
+                    showToast('Error changing password: ' + error.message, 'error');
+                });
+        });
+
+        // Delete account form
+        deleteAccountForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = auth.currentUser;
+            const password = document.getElementById('deletePassword').value;
+
+            // Reauthenticate user
+            const credential = firebase.auth.EmailAuthProvider.credential(
+                user.email, 
+                password
+            );
+
+            user.reauthenticateWithCredential(credential)
+                .then(() => {
+                    return user.delete();
+                })
+                .then(() => {
+                    showToast('Account deleted successfully');
+                    window.location.href = 'index.html';
+                })
+                .catch(error => {
+                    showToast('Error deleting account: ' + error.message, 'error');
+                });
+        });
+
+        // Auth functions
+        function logout() {
+            auth.signOut().then(() => {
+                window.location.href = 'index.html';
+            }).catch((error) => {
+                showToast('Error signing out: ' + error.message, 'error');
+            });
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+            updateThemeIcon();
+        }
+
+        function updateThemeIcon() {
+            const icon = document.getElementById('themeToggle')?.querySelector('i');
+            if (!icon) return;
+            
+            if (document.body.classList.contains('light-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === changePasswordModal) hideChangePasswordModal();
+            if (e.target === deleteAccountModal) hideDeleteAccountModal();
+            if (e.target === uploadPhotoModal) hideUploadPhotoModal();
+        });
+
+        // Close modals with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideChangePasswordModal();
+                hideDeleteAccountModal();
+                hideUploadPhotoModal();
+            }
+        });
+    </script>
+</body>
+</html>

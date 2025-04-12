@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Doctor - Disclaimer</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #3a7bd5;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f8f9fa;
+            --danger: #ff4757;
+            --success: #2ed573;
+            --warning: #ffa502;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Disclaimer Modal */
+        .disclaimer-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .disclaimer-card {
+            background: rgba(30, 30, 30, 0.95);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .disclaimer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .disclaimer-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .disclaimer-title {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .disclaimer-icon {
+            font-size: 2.5rem;
+        }
+
+        .disclaimer-content {
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--darker);
+        }
+
+        .disclaimer-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .disclaimer-content::-webkit-scrollbar-track {
+            background: var(--darker);
+            border-radius: 10px;
+        }
+
+        .disclaimer-content::-webkit-scrollbar-thumb {
+            background-color: var(--primary);
+            border-radius: 10px;
+        }
+
+        .disclaimer-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            font-size: 1.3rem;
+        }
+
+        .disclaimer-list {
+            padding-left: 1.8rem;
+            margin: 1rem 0;
+        }
+
+        .disclaimer-list li {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+
+        .disclaimer-list li::before {
+            content: '•';
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: -1.2rem;
+        }
+
+        .disclaimer-footer {
+            margin-top: 2.5rem;
+            text-align: center;
+        }
+
+        .disclaimer-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .disclaimer-btn {
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 180px;
+            justify-content: center;
+        }
+
+        .btn-accept {
+            background: linear-gradient(135deg, var(--success), #26c06d);
+            color: white;
+            border: none;
+        }
+
+        .btn-accept:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(46, 213, 115, 0.3);
+        }
+
+        .btn-decline {
+            background: rgba(255, 71, 87, 0.2);
+            color: var(--danger);
+            border: 2px solid var(--danger);
+        }
+
+        .btn-decline:hover {
+            background: rgba(255, 71, 87, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .required-checkbox {
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .checkbox-label {
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .disclaimer-card {
+                padding: 1.5rem;
+            }
+
+            .disclaimer-title {
+                font-size: 1.8rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .disclaimer-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .disclaimer-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="disclaimer-container">
+        <div class="disclaimer-card">
+            <div class="disclaimer-header">
+                <h1 class="disclaimer-title">
+                    <i class="fas fa-exclamation-triangle disclaimer-icon"></i>
+                    Important Disclaimer
+                </h1>
+                <p>Before using AI Doctor, please read and acknowledge this disclaimer</p>
+            </div>
+
+            <div class="disclaimer-content">
+                <div class="disclaimer-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-user-md section-icon"></i>
+                        Medical Information Notice
+                    </h3>
+                    <p>This AI Doctor assistant is an informational tool only and is <strong>not a substitute</strong> for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+                </div>
+
+                <div class="disclaimer-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-ban section-icon"></i>
+                        Limitations
+                    </h3>
+                    <ul class="disclaimer-list">
+                        <li>This system <strong>does not perform physical examinations</strong></li>
+                        <li>Diagnoses are <strong>probabilistic estimates</strong> only</li>
+                        <li><strong>Emergency conditions</strong> cannot be reliably identified</li>
+                        <li>Medication recommendations may <strong>not be appropriate</strong> for all individuals</li>
+                        <li>Not intended for <strong>pediatric, pregnancy, or geriatric</strong> cases without professional consultation</li>
+                    </ul>
+                </div>
+
+                <div class="disclaimer-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-shield-alt section-icon"></i>
+                        Data Privacy
+                    </h3>
+                    <p>All conversations are processed securely, but <strong>sensitive medical information should not be shared</strong>. We do not store personal health data after your session ends, but we may retain anonymized data for research purposes.</p>
+                </div>
+
+                <div class="disclaimer-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-clipboard-check section-icon"></i>
+                        Accuracy
+                    </h3>
+                    <p>While we use advanced AI models, medical information changes rapidly. The system may not have the most current research or treatment guidelines. <strong>Always verify critical information</strong> with a healthcare professional.</p>
+                </div>
+
+                <div class="required-checkbox">
+                    <input type="checkbox" id="acknowledgeCheckbox" required>
+                    <label for="acknowledgeCheckbox" class="checkbox-label">
+                        I have read and understand these terms
+                    </label>
+                </div>
+            </div>
+
+            <div class="disclaimer-footer">
+                <div class="disclaimer-buttons">
+                    <button class="disclaimer-btn btn-decline" id="declineBtn">
+                        <i class="fas fa-times"></i> Decline
+                    </button>
+                    <button class="disclaimer-btn btn-accept" id="acceptBtn" disabled>
+                        <i class="fas fa-check"></i> Accept & Continue
+                    </button>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                    By accepting, you agree to our <a href="#" style="color: var(--primary);">Terms of Service</a> and <a href="#" style="color: var(--primary);">Privacy Policy</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const acceptBtn = document.getElementById('acceptBtn');
+            const declineBtn = document.getElementById('declineBtn');
+            const checkbox = document.getElementById('acknowledgeCheckbox');
+
+            // Enable/disable accept button based on checkbox
+            checkbox.addEventListener('change', function() {
+                acceptBtn.disabled = !this.checked;
+            });
+
+            // Handle accept button click
+            acceptBtn.addEventListener('click', function() {
+                // Store acceptance in localStorage
+                localStorage.setItem('disclaimerAccepted', 'true');
+                
+                // Redirect to main content page
+                window.location.href = 'index.html'; // Update with your actual main content page
+            });
+
+            // Handle decline button click
+            declineBtn.addEventListener('click', function() {
+                // Redirect to exit page or Google
+                window.location.href = 'https://www.google.com';
+            });
+
+            // Check if already accepted (in case user navigates back)
+            if(localStorage.getItem('disclaimerAccepted')) {
+                window.location.href = 'index.html';
+            }
+        });
+        
+    </script>
+</body>
+</html>
+

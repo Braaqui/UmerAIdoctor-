@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - AI Doctor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --primary-light: #6ae0ff;
+            --secondary: #3a7bd5;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f8f9fa;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-light: rgba(255, 255, 255, 0.1);
+            --transition: all 0.3s ease;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            transition: var(--transition);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(58, 123, 213, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 210, 255, 0.1) 0%, transparent 20%);
+        }
+
+        body.light-mode {
+            background-color: var(--light);
+            color: var(--dark);
+            --glass: rgba(0, 0, 0, 0.05);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--glass);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(18, 18, 18, 0.9);
+            box-shadow: var(--shadow-sm);
+        }
+
+        body.light-mode header {
+            background-color: rgba(248, 249, 250, 0.9);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: var(--border-radius-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        body.light-mode .theme-toggle {
+            color: var(--dark);
+        }
+
+        .theme-toggle:hover {
+            background: var(--glass-light);
+        }
+
+        .content-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--glass);
+            border-radius: var(--border-radius-lg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow-lg);
+        }
+
+        body.light-mode .content-container {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 30px 0 15px;
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        body.light-mode p {
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        .mission-statement {
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-md);
+            border-left: 4px solid var(--primary);
+            margin: 30px 0;
+            font-style: italic;
+        }
+
+        body.light-mode .mission-statement {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-md);
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        body.light-mode .team-member {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            margin: 0 auto 15px;
+        }
+
+        .member-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .member-role {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        body.light-mode .member-role {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .member-bio {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        body.light-mode .member-bio {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-md);
+        }
+
+        body.light-mode .stat-item {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        body.light-mode .stat-label {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 50px 0 30px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        body.light-mode .footer {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 20px;
+                margin: 20px;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .content-container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .header-content {
+                justify-content: center;
+            }
+
+            .logo {
+                margin-bottom: 10px;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>AI Doctor</span>
+                </a>
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn btn-outline">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content-container">
+            <h1>About AI Doctor</h1>
+            <p>AI Doctor is revolutionizing healthcare through artificial intelligence, making personalized health insights accessible to everyone.</p>
+            
+            <div class="mission-statement">
+                <p>"Our mission is to empower individuals with AI-driven health information and tools that help them make better decisions about their wellbeing, while always emphasizing that our technology complements but doesn't replace professional medical care."</p>
+            </div>
+            
+            <h2>Our Story</h2>
+            <p>Founded in 2020 by a team of AI researchers and medical professionals, AI Doctor began as a research project at a leading university. What started as an experiment in applying machine learning to medical data quickly evolved into a powerful platform that helps thousands of users daily.</p>
+            
+            <p>Today, AI Doctor combines cutting-edge artificial intelligence with rigorously vetted medical knowledge to provide users with personalized health insights. Our technology analyzes patterns in health data to offer suggestions, but we always remind our users that AI Doctor is not a substitute for professional medical advice.</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Medical Experts</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Availability</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Uptime</div>
+                </div>
+            </div>
+            
+            <h2>Our Team</h2>
+            <p>The AI Doctor team brings together world-class talent in artificial intelligence, medicine, and user experience design.</p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Dr. Sarah Chen" class="member-photo">
+                    <h3 class="member-name">Dr. Sarah Chen</h3>
+                    <p class="member-role">Chief Medical Officer</p>
+                    <p class="member-bio">Board-certified physician with 15 years of clinical experience and a passion for health technology.</p>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="James Rodriguez" class="member-photo">
+                    <h3 class="member-name">James Rodriguez</h3>
+                    <p class="member-role">Head of AI Research</p>
+                    <p class="member-bio">PhD in Machine Learning with publications in Nature and other top journals.</p>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya Patel" class="member-photo">
+                    <h3 class="member-name">Priya Patel</h3>
+                    <p class="member-role">Product Lead</p>
+                    <p class="member-bio">Design thinking expert focused on creating intuitive health experiences.</p>
+                </div>
+                
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="David Kim" class="member-photo">
+                    <h3 class="member-name">David Kim</h3>
+                    <p class="member-role">Engineering Director</p>
+                    <p class="member-bio">Built scalable health systems used by millions at previous companies.</p>
+                </div>
+            </div>
+            
+            <h2>Our Technology</h2>
+            <p>AI Doctor's proprietary algorithms analyze health data while maintaining the highest standards of privacy and security. Our system continuously learns from new medical research and anonymized user data (with consent) to improve its recommendations.</p>
+            
+            <p>We partner with leading medical institutions to validate our models and ensure our technology aligns with current medical knowledge. All health suggestions are reviewed by our medical advisory board before being incorporated into our system.</p>
+            
+            <div class="cta-section">
+                <h2>Ready to experience AI Doctor?</h2>
+                <a href="signup.html" class="btn btn-primary">
+                    <i class="fas fa-user-plus"></i> Create Free Account
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2023 AI Doctor. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="faq.html">FAQs</a>
+            <a href="about.html">About</a>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        
+        function setupThemeToggle() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                const icon = themeToggle.querySelector('i');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                const icon = themeToggle.querySelector('i');
+                
+                if (document.body.classList.contains('light-mode')) {
+                    localStorage.setItem('theme', 'light');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    localStorage.setItem('theme', 'dark');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', setupThemeToggle);
+    </script>
+</body>
+</html>

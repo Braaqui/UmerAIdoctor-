@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Doctor - Advanced Virtual Health Assistant</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -101,113 +102,297 @@
             color: var(--primary);
         }
 
+        /* Navigation Links Styles */
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 18px;
+            align-items: center;
+            padding: 10px 0;
+            margin: 0;
         }
 
         .nav-links a {
-            color: var(--light);
+            color: var(--primary);
             text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative;
-            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
 
         body.light-mode .nav-links a {
-            color: var(--dark);
+            color: var(--primary);
+            background: rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .nav-links a:hover {
-            color: var(--primary);
+            color: var(--secondary);
+            background: rgba(58, 123, 213, 0.2);
+            transform: scale(1.2);
+            box-shadow: 0 6px 12px rgba(58, 123, 213, 0.4);
+        }
+
+        .nav-links a:hover .material-icons {
+            transform: rotate(15deg);
+            color: var(--secondary);
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
+            height: 3px;
+            background: var(--neon-glowy);
+            border-radius: 2px;
+            transition: width 0.3s ease, transform 0.3s ease;
         }
 
         .nav-links a:hover::after {
-            width: 100%;
+            width: 50%;
+            transform: translateX(-50%) scaleX(1.1);
         }
 
-        .auth-buttons {
-            display: flex;
-            gap: 15px;
-            align-items: center;
+        .nav-links a:focus, .nav-links a:active {
+            outline: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: scale(1.1);
         }
 
+        .nav-links a .material-icons {
+            font-size: 1.8rem;
+            vertical-align: middle;
+            transition: transform 0.3s ease, color 0.3s ease;
+            color: inherit;
+        }
+
+       /* Welcome Message - Enhanced */
+    .welcome-message {
+        color: var(--primary);
+        margin-right: 20px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        white-space: nowrap;
+        transition: var(--transition);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        position: relative;
+        padding-right: 15px;
+    }
+
+    .welcome-message::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 60%;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    body.light-mode .welcome-message::after {
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    body.light-mode .welcome-message {
+        color: var(--primary-dark);
+    }
+
+    /* Auth Buttons Container */
+    .auth-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* Auth Buttons - Enhanced */
+    .auth-buttons {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        position: relative;
+    }
+
+    .btn {
+        position: relative;
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        text-decoration: none;
+        min-width: 110px;
+        text-align: center;
+        overflow: hidden;
+        border: none;
+        outline: none;
+        z-index: 1;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.3), var(--shadow-sm);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.4), var(--shadow-md);
+        background: linear-gradient(135deg, var(--secondary), var(--primary));
+    }
+
+    .btn-outline {
+        background: transparent;
+        color: var(--primary);
+        border: 2px solid var(--primary);
+        transition: all 0.4s, border-color 0.2s;
+    }
+
+    .btn-outline:hover {
+        background: var(--primary);
+        color: white;
+        border-color: transparent;
+        transform: translateY(-2px);
+    }
+
+    /* Theme Toggle - Enhanced */
+    .theme-toggle {
+        background: var(--glass);
+        border: none;
+        color: var(--text-color);
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: var(--transition);
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(5px);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .theme-toggle:hover {
+        color: var(--primary);
+        transform: rotate(15deg) scale(1.1);
+        box-shadow: var(--shadow-md);
+    }
+
+    /* Dark/Light Mode Adjustments */
+    body.dark-mode {
+        --text-color: var(--light);
+    }
+
+    body.light-mode {
+        --text-color: var(--dark);
+        --glass: rgba(0, 0, 0, 0.05);
+    }
+
+    body.dark-mode .btn-outline {
+        color: var(--light);
+        border-color: var(--light);
+    }
+
+    body.dark-mode .btn-outline:hover {
+        background: var(--light);
+        color: var(--dark);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+        .welcome-message {
+            font-size: 1rem;
+            margin-right: 15px;
+        }
+        
         .btn {
             padding: 10px 20px;
-            border-radius: var(--border-radius-lg);
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
+            min-width: 100px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .auth-container {
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .welcome-message {
+            display: none; /* Hide on smaller screens */
+        }
+        
+        .auth-buttons {
             gap: 8px;
-            font-size: 0.95rem;
         }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            box-shadow: var(--neon-glow);
+        
+        .btn {
+            padding: 10px 16px;
+            min-width: 90px;
+            font-size: 0.9rem;
         }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 1px solid var(--primary);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
-        }
-
+        
         .theme-toggle {
-            background: none;
-            border: none;
-            color: var(--light);
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-left: 10px;
-            transition: var(--transition);
+            width: 38px;
+            height: 38px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .auth-buttons {
+            gap: 6px;
+        }
+        
+        .btn {
+            padding: 8px 12px;
+            min-width: 80px;
+            font-size: 0.85rem;
+        }
+        
+        .theme-toggle {
             width: 36px;
             height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 1.1rem;
         }
+    }
 
-        .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.1);
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Ripple Effect */
+    .btn-ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.4);
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+        pointer-events: none;
+    }
+
+    @keyframes ripple {
+        to {
+            transform: scale(2.5);
+            opacity: 0;
         }
-
-        body.light-mode .theme-toggle {
-            color: var(--dark);
-        }
-
-        body.light-mode .theme-toggle:hover {
-            background: rgba(0, 0, 0, 0.05);
-        }
-
+    }
         /* Hero Section */
         .hero {
             padding: 100px 0 60px;
@@ -232,6 +417,9 @@
             margin-bottom: 20px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
+            background-clip: text;
+            background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1.2;
             font-weight: 700;
@@ -256,18 +444,44 @@
             overflow: hidden;
             box-shadow: var(--shadow-lg);
             transition: var(--transition);
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(0, 210, 255, 0.3);
+            position: relative;
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .hero-image:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px) rotate(1deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 210, 255, 0.5);
+            border-color: rgba(0, 210, 255, 0.7);
+        }
+
+        .hero-image:hover::after {
+            opacity: 1;
         }
 
         .hero-image img {
             width: 100%;
             height: auto;
             display: block;
+            transition: transform 0.5s ease, filter 0.3s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.05) translateY(-2px);
+            filter: brightness(1.1);
         }
 
         .hero-buttons {
@@ -1193,6 +1407,44 @@
             opacity: 1;
         }
 
+        /* Markdown Styling */
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 {
+            margin: 15px 0 10px;
+            color: var(--primary);
+        }
+
+        .markdown-content p {
+            margin-bottom: 10px;
+        }
+
+        .markdown-content ul, .markdown-content ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .markdown-content li {
+            margin-bottom: 5px;
+        }
+
+        .markdown-content strong {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .markdown-content em {
+            font-style: italic;
+        }
+
+        .markdown-content hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 15px 0;
+        }
+
+        body.light-mode .markdown-content hr {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
         /* Responsive Styles */
         @media (max-width: 992px) {
             .hero h1 {
@@ -1339,6 +1591,205 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
+
+
+        .user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 15px;
+  max-width: 200px;
+}
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--glass);
+  border: 2px solid var(--primary);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.avatar-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.avatar-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s ease-in-out infinite;
+}
+
+.user-name {
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Dark/Light mode adjustments */
+body.light-mode {
+  .profile-avatar {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  .avatar-loading {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .user-name {
+    display: none;
+  }
+  
+  .profile-avatar {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+
+
+
+
+ /* Enhanced Message Styles */
+ .message {
+            display: flex;
+            flex-direction: column;
+            max-width: 85%;
+            padding: 15px 20px;
+            border-radius: 18px;
+            line-height: 1.6;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+            font-size: 0.95rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 8px;
+        }
+        
+        .message-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            gap: 8px;
+        }
+        
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+        
+        .message-sender {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+        
+        .user-message .message-sender {
+            color: white;
+        }
+        
+        .message-time {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-left: auto;
+        }
+        
+        .message-content {
+            word-wrap: break-word;
+        }
+        
+        /* Welcome Message Styles */
+        .welcome-message-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .welcome-message {
+            display: inline-block;
+            background: var(--glass);
+            padding: 15px 25px;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 80%;
+        }
+        
+        .welcome-user {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .welcome-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+        
+        .welcome-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        body.light-mode .welcome-message {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -1350,15 +1801,15 @@
                     <span>Umer AI Doctor</span>
                 </a>
                 <nav class="nav-links">
-                    <a href="#">Home</a>
-                    <a href="#chatbot">Chat</a>
-                    <a href="#results">Results</a>
-                    <a href="#tips">Health Tips</a>
-                    <a href="#features">Features</a>
+                    <a href="#"><i class="material-icons">home</i></a>
+                    <a href="#chatbot"><i class="material-icons">chat</i></a>
+                    <a href="#results"><i class="material-icons">assignment</i></a>
+                    <a href="#tips"><i class="material-icons">local_hospital</i></a>
+                    <a href="#features"><i class="material-icons">star</i></a>
                 </nav>
                 <div class="auth-buttons">
-                    <button class="btn btn-outline">Login</button>
-                    <button class="btn btn-primary">Sign Up</button>
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
                     <button class="theme-toggle" id="themeToggle">
                         <i class="fas fa-moon"></i>
                     </button>
@@ -1538,26 +1989,444 @@
 
     <footer>
         <div class="container">
-            <a href="#" class="footer-logo">AI Doctor</a>
+            <a href="index.html" class="footer-logo">
+                <i class="fas fa-robot"></i>
+                <span>AI Doctor</span>
+            </a>
             <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Contact Us</a>
-                <a href="#">FAQs</a>
-                <a href="#">About</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="faq.html">FAQs</a>
+                <a href="about.html">About</a>
             </div>
             <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
             </div>
-            <p class="copyright">© 2023 AI Doctor. All rights reserved.</p>
+            <p class="copyright">© <script>document.write(new Date().getFullYear())</script> AI Doctor. All rights reserved.</p>
         </div>
     </footer>
 
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+
+
     <script>
+
+
+
+
+// Firebase configuration and initialization
+const firebaseConfig = {
+    apiKey: "AIzaSyBXe8bAEIVVRCen2dXWp2dELEUazcq3pzw",
+    authDomain: "document-maker-1464.firebaseapp.com",
+    projectId: "document-maker-1464",
+    storageBucket: "document-maker-1464.appspot.com",
+    messagingSenderId: "1099330260079",
+    appId: "1:1099330260079:web:b5eca7375749f9da42919a",
+    measurementId: "G-9PNZ3RL46R"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+// Enhanced Theme Toggle Functionality
+function setupThemeToggle() {
+    const themeToggle = document.getElementById('themeToggle');
+    if (!themeToggle) return;
+
+    const icon = themeToggle.querySelector('i');
+    const savedTheme = localStorage.getItem('theme');
+    
+    // Initialize theme
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        icon.classList.replace('fa-moon', 'fa-sun');
+    }
+    
+    // Toggle handler
+    themeToggle.addEventListener('click', () => {
+        const isLight = document.body.classList.toggle('light-mode');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        icon.classList.replace(isLight ? 'fa-moon' : 'fa-sun', 
+                             isLight ? 'fa-sun' : 'fa-moon');
+    });
+}
+
+// Auth state handler with proper element checks
+auth.onAuthStateChanged((user) => {
+    const authButtons = document.querySelector('.auth-buttons');
+    if (!authButtons) return;
+    
+    if (user) {
+        // User is signed in
+        // Enhanced avatar component with multiple fallback options and better error handling
+        const renderUserAvatar = (user) => {
+            // Get first letter of name or email for fallback
+            const getAvatarLetter = () => {
+                if (user.displayName) return user.displayName.charAt(0).toUpperCase();
+                if (user.email) return user.email.charAt(0).toUpperCase();
+                return 'U';
+            };
+
+            // Generate consistent color from user data
+            const getAvatarColor = () => {
+                const str = user.email || user.uid || 'user';
+                let hash = 0;
+                for (let i = 0; i < str.length; i++) {
+                    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+                }
+                const hue = Math.abs(hash % 360);
+                return `hsl(${hue}, 70%, 60%)`;
+            };
+
+            // Create fallback avatar with smooth transition
+            const createFallbackAvatar = () => {
+                const letter = getAvatarLetter();
+                const color = getAvatarColor();
+                return `
+                    <div class="avatar-fallback" style="background-color: ${color}">
+                        ${letter}
+                    </div>
+                `;
+            };
+
+            // Add loading state for image
+            const createLoadingAvatar = () => {
+                return `
+                    <div class="avatar-loading">
+                        <div class="loading-spinner"></div>
+                    </div>
+                `;
+            };
+
+            // Return the complete avatar HTML
+            return `
+                <div class="profile-avatar" 
+                     title="${user.displayName || user.email || 'User'}"
+                     onclick="window.location.href='profile.html'">
+                    ${user.photoURL ? `
+                        <img src="${user.photoURL}?${Date.now()}" 
+                             alt="Profile" 
+                             class="profile-image"
+                             loading="lazy"
+                             onload="this.style.opacity = 1"
+                             onerror="this.onerror=null; this.replaceWith(createFallbackAvatar())">
+                        ${createLoadingAvatar()}
+                    ` : createFallbackAvatar()}
+                </div>
+            `;
+        };
+
+        authButtons.innerHTML = `
+            <div class="user-profile">
+                ${renderUserAvatar(user)}
+                <span class="user-name">${user.displayName || user.email || 'User'}</span>
+            </div>
+            <button class="btn btn-outline" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        `;
+
+        // Add event listeners
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            auth.signOut().then(() => {
+                window.location.reload();
+            });
+        });
+
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    } else {
+        // User is signed out
+        authButtons.innerHTML = `
+            <a href="login.html" class="btn btn-outline">Login</a>
+            <a href="signup.html" class="btn btn-primary">Sign Up</a>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        `;
+        
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    }
+});
+
+// Theme toggle function
+function toggleTheme() {
+    document.body.classList.toggle('light-mode');
+    localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+}
+
+// Check for saved theme preference
+if (localStorage.getItem('theme') === 'light') {
+    document.body.classList.add('light-mode');
+}
+
+
+
+
+// Initialize theme toggle when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    setupThemeToggle();
+    
+    // Check if user is logged in on page load
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            // User is signed in
+            console.log("User is logged in:", user.email);
+        } else {
+            // User is signed out
+            console.log("User is logged out");
+        }
+    });
+});
+
+
+
+
+        // Enhanced Disease Data with NLP-friendly terms
+        const diseaseData = {
+            disclaimer: {
+                english: "**Important:** This is an AI-generated model and may contain errors. Please consult a doctor before using any medications or treatments. The information provided here is for informational purposes only.",
+                urdu: "**اہم:** یہ ایک AI جنریٹڈ ماڈل ہے اور اس میں غلطیاں ہو سکتی ہیں۔ کسی بھی قسم کی ادویات استعمال کرنے سے پہلے ڈاکٹر سے مشورہ لازمی کریں۔ یہاں دی گئی معلومات صرف معلوماتی مقاصد کے لیے ہیں۔"
+            },
+            diseaseMapping: {
+                "fever": {
+                    description: "Fever is a temporary increase in body temperature, often due to an infection or illness.",
+                    diseases: ["Flu", "Viral Infection", "Typhoid"],
+                    medicines: ["Paracetamol", "Ibuprofen", "Aspirin"],
+                    precautions: ["Drink plenty of water", "Rest", "Avoid cold environments"],
+                    symptoms: ["High body temperature", "Chills", "Sweating", "Fatigue", "Headache"],
+                    advice: "If fever lasts more than 3 days, or is accompanied by severe pain or rash, consult a doctor."
+                },
+                "بخار": {
+                    description: "بخار عارضی طور پر جسم کے درجہ حرارت میں اضافے کو کہتے ہیں جو عموماً کسی انفیکشن یا بیماری کی وجہ سے ہوتا ہے۔",
+                    diseases: ["فلو", "وائرل انفیکشن", "ٹائیفائیڈ"],
+                    medicines: ["پیرسامیٹول", "ایبوپروفین", "ایسپیرن"],
+                    precautions: ["کافی پانی پیئیں", "آرام کریں", "ٹھنڈی جگہ سے بچیں"],
+                    symptoms: ["اعلی درجہ حرارت", "ٹھنڈک لگنا", "پسینہ آنا", "تھکن", "سر درد"],
+                    advice: "اگر بخار 3 دن سے زیادہ رہے، یا شدید درد یا دانے کے ساتھ ہو تو فوراً ڈاکٹر سے مشورہ کریں۔"
+                },
+                "sore throat": {
+                    description: "A sore throat is pain, scratchiness, or irritation of the throat that often worsens when swallowing.",
+                    diseases: ["Flu", "Throat Infection"],
+                    medicines: ["Gargle with salt water", "Lozenges", "Antibiotics (if bacterial)"],
+                    precautions: ["Avoid cold drinks", "Rest your voice", "Gargle frequently"],
+                    symptoms: ["Pain or irritation in the throat", "Difficulty swallowing", "Swollen lymph nodes", "Redness in the throat"],
+                    advice: "If the sore throat persists for more than 5 days, or is accompanied by fever or difficulty breathing, consult a doctor."
+                },
+                "گلا خراب": {
+                    description: "گلے کا خراب ہونا گلے میں درد، خراش یا جلن کا احساس ہے جو اکثر نگلنے میں مشکلات پیدا کرتا ہے۔",
+                    diseases: ["فلو", "گلے کا انفیکشن"],
+                    medicines: ["نمکین پانی سے غرارے کریں", "لوژن", "اینٹی بایوٹکس (اگر بیکٹیریا ہو)"],
+                    precautions: ["ٹھنڈے مشروبات سے بچیں", "آواز کو آرام دیں", "اکثر غرارے کریں"],
+                    symptoms: ["گلے میں درد یا جلن", "نگلنے میں مشکلات", "لمبے لمبے لیمپ کے پھولنا", "گلے میں لالی"],
+                    advice: "اگر گلے کی خرابی 5 دن سے زیادہ رہے یا بخار یا سانس لینے میں مشکل ہو، تو فوراً ڈاکٹر سے مشورہ کریں۔"
+                },
+                "cough": {
+                    description: "Coughing is a reflex action to clear your airways of mucus, irritants, or foreign particles.",
+                    diseases: ["Flu", "Corona", "Cold"],
+                    medicines: ["Cough Syrup", "Lozenges", "Honey with Lemon"],
+                    precautions: ["Avoid dust", "Cover your mouth while coughing", "Drink warm fluids"],
+                    symptoms: ["Dry or productive cough", "Sore throat", "Wheezing", "Chest tightness"],
+                    advice: "If coughing persists for more than 3 weeks, or is accompanied by chest pain, blood in the cough, or fever, seek medical attention."
+                },
+                "کھانسی": {
+                    description: "کھانسی ایک قدرتی عمل ہے جو راستوں سے مائع، آلودگی یا غیر ضروری مادے صاف کرنے کے لئے ہوتی ہے۔",
+                    diseases: ["فلو", "کورونا", "نزلہ"],
+                    medicines: ["کافی شربت", "لوژن", "شہد اور لیموں"],
+                    precautions: ["دھول سے بچیں", "کھانستے وقت منہ ڈھانپیں", "گرم مائع پئیں"],
+                    symptoms: ["خشک یا پیداواری کھانسی", "گلے میں درد", "سانس لینے میں دشواری", "سینے میں جکڑن"],
+                    advice: "اگر کھانسی 3 ہفتے سے زیادہ رہے یا سینے میں درد، خون یا بخار ہو، تو فوراً طبی امداد حاصل کریں۔"
+                },
+                "cold": {
+                    description: "A cold is a viral infection of the upper respiratory system that causes a runny nose, sore throat, and cough.",
+                    diseases: ["Cold", "Flu"],
+                    medicines: ["Antihistamines", "Decongestants", "Paracetamol"],
+                    precautions: ["Keep warm", "Avoid cold exposure", "Rest"],
+                    symptoms: ["Runny nose", "Sore throat", "Sneezing", "Mild cough", "Fatigue"],
+                    advice: "If cold symptoms last longer than 10 days, or are accompanied by a fever, consult a healthcare professional."
+                },
+                "نزلہ": {
+                    description: "نزلہ ایک وائرل انفیکشن ہے جو زیادہ تر نزلہ اور گلے کی خرابی کا سبب بنتا ہے۔",
+                    diseases: ["نزلہ", "فلو"],
+                    medicines: ["اینٹی ہسٹامینز", "ڈیکانجیسٹنٹس", "پیرسامیٹول"],
+                    precautions: ["گرم رکھیں", "ٹھنڈے ماحول سے بچیں", "آرام کریں"],
+                    symptoms: ["نزلہ", "گلے کی خرابی", "چھینکیں", "ہلکی کھانسی", "تھکن"],
+                    advice: "اگر نزلہ 10 دن سے زیادہ رہے یا بخار ہو، تو فوراً طبی مدد حاصل کریں۔"
+                },
+                "headache": {
+                    description: "Headaches can occur due to various reasons such as stress, dehydration, viral infections, or more serious conditions like a migraine or brain tumor.",
+                    diseases: ["Migraine", "Tension Headache", "Cluster Headache", "Sinusitis", "Flu"],
+                    medicines: ["Painkillers", "Ibuprofen", "Paracetamol", "Aspirin", "Triptans (for migraines)", "Nasal Decongestants (for sinus-related headaches)"],
+                    precautions: ["Rest in a quiet, dark room", "Stay hydrated", "Avoid bright lights and loud noises", "Practice relaxation techniques to manage stress", "Use a cold compress on the forehead or neck"],
+                    symptoms: ["Throbbing pain", "Sensitivity to light or sound", "Nausea (in severe cases)", "Pressure around the eyes (in sinus headaches)"],
+                    advice: "If headaches are severe, recurrent, or associated with vision problems, vomiting, or numbness, seek medical help immediately."
+                },
+                "سر درد": {
+                    description: "سر درد مختلف وجوہات کی بنا پر ہو سکتا ہے جیسے ذہنی دباؤ، پانی کی کمی، وائرل انفیکشن یا سنگین حالتیں جیسے مائگرین یا دماغی رسولہ۔",
+                    diseases: ["مائگرین", "ٹینشن سر درد", "کلسٹر سر درد", "سائنسائٹس", "فلو"],
+                    medicines: ["درد کش ادویات", "ایبوپروفین", "پیرسامیٹول", "ایسپیرن", "ٹریپٹانز (مائگرین کے لیے)", "ناک کے ڈی کانجیسٹنٹس (سائنس کے سر درد کے لیے)"],
+                    precautions: ["خاموش اور تاریک کمرے میں آرام کریں", "پانی پئیں", "چمکدار روشنیوں اور شور سے بچیں", "ذہنی دباؤ کو کم کرنے کے لیے آرام کی مشقیں کریں", "پیشانی یا گردن پر ٹھنڈی پٹی لگائیں"],
+                    symptoms: ["دھڑکتا ہوا درد", "چمکدار روشنی یا آواز سے حساسیت", "شدید حالتوں میں متلی", "آنکھوں کے ارد گرد دباؤ (سائنس کے سر درد میں)"],
+                    advice: "اگر سر درد شدید ہو، بار بار ہو، یا بصارت کے مسائل، قے یا سن ہونے کے ساتھ ہو، فوراً طبی مدد حاصل کریں۔"
+                },
+                "body pain": {
+                    description: "Body pain refers to widespread discomfort that can occur due to infections, fatigue, or other health issues like arthritis or fibromyalgia.",
+                    diseases: ["Flu", "Dengue", "Arthritis", "Fibromyalgia", "Chronic Fatigue Syndrome"],
+                    medicines: ["Painkillers", "Paracetamol", "Ibuprofen", "Aspirin", "Corticosteroids (for inflammation)"],
+                    precautions: ["Stay warm and avoid drafts", "Rest well to allow your body to heal", "Use heat packs or cold compresses to alleviate pain", "Maintain a balanced diet and hydration"],
+                    symptoms: ["Widespread pain", "Muscle aches", "Fatigue", "Stiffness", "Swelling (in arthritis)"],
+                    advice: "If body pain persists for more than a week or is accompanied by joint swelling or stiffness, consult a doctor."
+                },
+                "جسم میں درد": {
+                    description: "جسم میں درد ایک وسیع درد کی حالت ہے جو انفیکشن، تھکن یا دیگر صحت کے مسائل جیسے جوڑوں کی سوزش یا فائبرومیالیا کی وجہ سے ہو سکتی ہے۔",
+                    diseases: ["فلو", "ڈینگی", "جوڑوں کی سوزش", "فائبرومیالیا", "کرونک تھکن سنڈروم"],
+                    medicines: ["درد کش ادویات", "پیرسامیٹول", "ایبوپروفین", "ایسپیرن", "کورٹیکوسٹیرائڈز (سوزش کے لیے)"],
+                    precautions: ["گرم رکھیں اور ہوا سے بچیں", "اچھی طرح آرام کریں تاکہ جسم صحتیاب ہو سکے", "درد کم کرنے کے لیے گرم یا ٹھنڈی پٹی کا استعمال کریں", "متوازن غذا اور پانی پینے کی عادت رکھیں"],
+                    symptoms: ["وسیع درد", "پٹھوں کا درد", "تھکن", "اکڑن", "سوجن (جوڑوں کی سوزش میں)"],
+                    advice: "اگر جسم میں درد ایک ہفتے سے زیادہ رہے یا جوڑوں میں سوجن یا اکڑن ہو، تو ڈاکٹر سے مشورہ کریں۔"
+                },
+                "vomiting": {
+                    description: "Vomiting is the forceful expulsion of stomach contents through the mouth, which may occur due to infections, food poisoning, or other gastrointestinal issues.",
+                    diseases: ["Food Poisoning", "Stomach Infection", "Gastritis", "Ulcers"],
+                    medicines: ["Anti-nausea medication", "Activated Charcoal", "ORS (Oral Rehydration Salts)", "Antacids"],
+                    precautions: ["Avoid spicy or heavy foods", "Stay hydrated with clear fluids", "Eat light meals", "Rest and avoid physical exertion"],
+                    symptoms: ["Nausea", "Loss of appetite", "Abdominal discomfort", "Dehydration (if vomiting is severe)"],
+                    advice: "If vomiting lasts for more than 24 hours or is accompanied by severe abdominal pain or blood in vomit, seek medical attention."
+                },
+                "الٹی": {
+                    description: "الٹی وہ عمل ہے جس میں معدے کا مواد منہ سے باہر نکلتا ہے اور یہ انفیکشن، فوڈ پوائزننگ یا دیگر معدے کے مسائل کی وجہ سے ہو سکتی ہے۔",
+                    diseases: ["فوڈ پوائزننگ", "معدے کا انفیکشن", "گیسٹروائٹس", "السر"],
+                    medicines: ["اینٹی نزلہ دوا", "ایکٹیویٹڈ چارکول", "اورل رہائیڈریشن سالٹ", "اینٹی ایسڈز"],
+                    precautions: ["چٹ پٹے یا بھاری کھانوں سے بچیں", "صاف مائع پینے سے ہائیڈریٹ رہیں", "ہلکے کھانے کھائیں", "آرام کریں اور جسمانی مشقت سے بچیں"],
+                    symptoms: ["نزلہ", "بھوک کا نہ لگنا", "معدے میں تکلیف", "دہی کی کمی (اگر الٹی زیادہ ہو)"],
+                    advice: "اگر الٹی 24 گھنٹوں سے زیادہ رہے یا شدید معدے کے درد یا الٹی میں خون ہو تو فوراً ڈاکٹر سے مشورہ کریں۔"
+                },
+                "diarrhea": {
+                    description: "Diarrhea is characterized by loose or watery stools, often caused by infections, contaminated food or water, or digestive disorders.",
+                    diseases: ["Cholera", "Stomach Infection", "Irritable Bowel Syndrome (IBS)", "Food Allergies"],
+                    medicines: ["Anti-diarrheal medication", "ORS", "Probiotics", "Antibiotics (if bacterial infection)"],
+                    precautions: ["Drink plenty of fluids", "Avoid dairy products", "Eat bland foods", "Rest and avoid heavy meals"],
+                    symptoms: ["Loose, watery stools", "Abdominal cramping", "Dehydration", "Urgency to use the restroom"],
+                    advice: "If diarrhea lasts more than 2 days, or is accompanied by blood in stool, fever, or dehydration, consult a healthcare provider."
+                },
+                "دست": {
+                    description: "دست ایک حالت ہے جس میں پانی والی یا نرم پاخانہ آتی ہے، جو انفیکشن، آلودہ کھانا یا پانی، یا نظام انہضام کے مسائل کی وجہ سے ہو سکتی ہے۔",
+                    diseases: ["ہیضہ", "معدے کا انفیکشن", "آئرٹیبل باؤل سنڈروم (IBS)", "فوڈ الرجیز"],
+                    medicines: ["اینٹی دست دوا", "اورل رہائیڈریشن سالٹ", "پروبایوٹکس", "اینٹی بایوٹکس (اگر بیکٹیریا ہو)"],
+                    precautions: ["کافی پانی پیئیں", "دہی سے بچیں", "ہلکا کھانا کھائیں", "آرام کریں اور بھاری کھانے سے بچیں"],
+                    symptoms: ["پانی والی نرم پاخانہ", "معدے میں جلن", "دہی کی کمی", "پاخانہ کے دوران جلدی ضرورت"],
+                    advice: "اگر دست 2 دن سے زیادہ رہے یا پاخانے میں خون، بخار یا پانی کی کمی ہو، تو فوراً طبی مدد حاصل کریں۔"
+                },
+                "shortness of breath": {
+                    description: "Shortness of breath, or dyspnea, is the feeling of not being able to get enough air, which can be caused by various conditions like asthma, infections, or heart problems.",
+                    diseases: ["Asthma", "Corona", "Heart Disease", "Pulmonary Diseases"],
+                    medicines: ["Inhalers", "Oxygen therapy", "Steroids (if prescribed)", "Bronchodilators"],
+                    precautions: ["Avoid triggers like smoke and dust", "Use inhalers as prescribed", "Stay calm and avoid physical exertion"],
+                    symptoms: ["Shortness of breath", "Wheezing", "Rapid breathing", "Chest tightness"],
+                    advice: "If shortness of breath persists or is severe, or if accompanied by chest pain, seek immediate medical help."
+                },
+                "سانس لینے میں دشواری": {
+                    description: "سانس لینے میں دشواری وہ احساس ہے کہ آپ کو کافی ہوا نہیں مل رہی، جو دمہ، انفیکشن یا دل کی بیماری جیسی مختلف حالتوں کی وجہ سے ہو سکتی ہے۔",
+                    diseases: ["دمہ", "کورونا", "دل کی بیماری", "پھیپھڑوں کی بیماریاں"],
+                    medicines: ["انھیلرز", "آکسیجن تھراپی", "اسٹیرائڈز (اگر تجویز کیا گیا ہو)", "برانکھیو ڈائیلیٹرز"],
+                    precautions: ["دھواں اور دھول سے بچیں", "انھیلرز کا استعمال کریں جیسے تجویز کیا گیا ہو", "آرام کریں اور جسمانی مشقت سے بچیں"],
+                    symptoms: ["سانس کی کمی", "سانس لینے میں رکاوٹ", "جلدی سانس لینا", "سینے میں جکڑن"],
+                    advice: "اگر سانس لینے میں دشواری مسلسل ہو یا شدید ہو، یا سینے میں درد ہو، فوراً طبی مدد حاصل کریں۔"
+                },
+                "fatigue": {
+                    description: "Fatigue is a state of extreme tiredness or lack of energy, often due to overwork, illness, or lack of sleep.",
+                    diseases: ["Chronic Fatigue Syndrome", "Anemia", "Flu", "Depression"],
+                    medicines: ["Iron supplements (for anemia)", "Vitamin B12", "Antidepressants (if prescribed)"],
+                    precautions: ["Get adequate sleep", "Maintain a balanced diet", "Avoid overexertion", "Stay hydrated"],
+                    symptoms: ["Persistent tiredness", "Weakness", "Difficulty concentrating", "Muscle aches"],
+                    advice: "If fatigue lasts more than 2 weeks or is accompanied by weight loss or dizziness, consult a doctor."
+                },
+                "تھکن": {
+                    description: "تھکن ایک ایسی حالت ہے جس میں شدید تھکاوٹ یا توانائی کی کمی ہوتی ہے، جو اکثر زیادہ کام، بیماری یا نیند کی کمی کی وجہ سے ہوتی ہے۔",
+                    diseases: ["کرونک تھکن سنڈروم", "خون کی کمی", "فلو", "ڈیپریشن"],
+                    medicines: ["آئرن سپلیمنٹس (خون کی کمی کے لیے)", "وٹامن بی 12", "اینٹی ڈیپریسنٹس (اگر تجویز کیا گیا ہو)"],
+                    precautions: ["کافی نیند لیں", "متوازن غذا کھائیں", "زیادہ مشقت سے بچیں", "پانی پیتے رہیں"],
+                    symptoms: ["مسلسل تھکاوٹ", "کمزوری", "توجہ مرکوز کرنے میں مشکل", "پٹھوں میں درد"],
+                    advice: "اگر تھکن 2 ہفتوں سے زیادہ رہے یا وزن میں کمی یا چکر آنے کے ساتھ ہو، تو ڈاکٹر سے مشورہ کریں۔"
+                },
+                "stomach ache": {
+                    description: "Stomach ache is discomfort or pain in the abdominal area, often due to indigestion, infection, or other issues.",
+                    diseases: ["Indigestion", "Gastritis", "Food Poisoning", "Appendicitis"],
+                    medicines: ["Antacids", "Painkillers", "Antibiotics (if bacterial)", "Anti-spasmodics"],
+                    precautions: ["Avoid spicy or oily foods", "Eat small meals", "Stay hydrated", "Rest"],
+                    symptoms: ["Abdominal pain", "Bloating", "Nausea", "Burning sensation"],
+                    advice: "If stomach ache persists for more than 2 days, or is severe with vomiting or fever, seek medical help."
+                },
+                "پیٹ کا درد": {
+                    description: "پیٹ کا درد پیٹ کے حصے میں تکلیف یا درد ہے، جو اکثر بدہضمی، انفیکشن یا دیگر مسائل کی وجہ سے ہوتا ہے۔",
+                    diseases: ["بدہضمی", "گیسٹروائٹس", "فوڈ پوائزننگ", "اپینڈیسائٹس"],
+                    medicines: ["اینٹی ایسڈز", "درد کش ادویات", "اینٹی بایوٹکس (اگر بیکٹیریا ہو)", "اینٹی سپاسموڈکس"],
+                    precautions: ["چٹ پٹے یا تیل والے کھانوں سے بچیں", "چھوٹے کھانے کھائیں", "پانی پیتے رہیں", "آرام کریں"],
+                    symptoms: ["پیٹ میں درد", "پھولنا", "متلی", "جلن کا احساس"],
+                    advice: "اگر پیٹ کا درد 2 دن سے زیادہ رہے یا شدید ہو، الٹی یا بخار کے ساتھ ہو، تو فوراً طبی مدد لیں۔"
+                },
+                "rash": {
+                    description: "A rash is an area of irritated or swollen skin, often caused by allergies, infections, or other conditions.",
+                    diseases: ["Allergic Reaction", "Measles", "Chickenpox", "Eczema"],
+                    medicines: ["Antihistamines", "Hydrocortisone cream", "Antiviral drugs (if viral)"],
+                    precautions: ["Avoid scratching", "Keep skin clean and dry", "Avoid allergens", "Use mild soaps"],
+                    symptoms: ["Redness", "Itching", "Bumps or blisters", "Swelling"],
+                    advice: "If rash spreads rapidly, is painful, or is accompanied by fever, consult a doctor immediately."
+                },
+                "دھبے": {
+                    description: "دھبے جلد کی سوزش یا سوجن کا ایک حصہ ہوتا ہے، جو اکثر الرجی، انفیکشن یا دیگر حالات کی وجہ سے ہوتا ہے۔",
+                    diseases: ["الرجک ردعمل", "خسرہ", "چکن پاکس", "ایکزیما"],
+                    medicines: ["اینٹی ہسٹامینز", "ہائیڈروکورٹیسون کریم", "اینٹی وائرل ادویات (اگر وائرل ہو)"],
+                    precautions: ["کھجانے سے بچیں", "جلد کو صاف اور خشک رکھیں", "الرجین سے بچیں", "ہلکے صابن استعمال کریں"],
+                    symptoms: ["لالی", "خارش", "دھبے یا چھالے", "سوجن"],
+                    advice: "اگر دھبے تیزی سے پھیلیں، دردناک ہوں یا بخار کے ساتھ ہوں، تو فوراً ڈاکٹر سے مشورہ کریں۔"
+                },
+                "joint pain": {
+                    description: "Joint pain is discomfort or soreness in the joints, often due to inflammation, injury, or chronic conditions.",
+                    diseases: ["Arthritis", "Gout", "Injury", "Lupus"],
+                    medicines: ["Painkillers", "Ibuprofen", "Corticosteroids", "Anti-inflammatory drugs"],
+                    precautions: ["Avoid overexertion", "Apply heat or cold packs", "Maintain a healthy weight", "Stay active with light exercise"],
+                    symptoms: ["Pain in joints", "Stiffness", "Swelling", "Reduced mobility"],
+                    advice: "If joint pain lasts more than a week or is accompanied by swelling or fever, consult a doctor."
+                },
+                "جوڑوں کا درد": {
+                    description: "جوڑوں کا درد جوڑوں میں تکلیف یا درد ہے، جو اکثر سوزش، چوٹ یا دائمی حالات کی وجہ سے ہوتا ہے۔",
+                    diseases: ["جوڑوں کی سوزش", "گاؤٹ", "چوٹ", "لوپس"],
+                    medicines: ["درد کش ادویات", "ایبوپروفین", "کورٹیکوسٹیرائڈز", "اینٹی انفلامیٹری ادویات"],
+                    precautions: ["زیادہ مشقت سے بچیں", "گرم یا ٹھنڈی پٹی لگائیں", "صحت مند وزن برقرار رکھیں", "ہلکی ورزش جاری رکھیں"],
+                    symptoms: ["جوڑوں میں درد", "اکڑن", "سوجن", "حرکت میں کمی"],
+                    advice: "اگر جوڑوں کا درد ایک ہفتے سے زیادہ رہے یا سوجن یا بخار کے ساتھ ہو، تو ڈاکٹر سے مشورہ کریں۔"
+                },
+                "fever with chills": {
+                    description: "Fever with chills is a condition where high body temperature is accompanied by shivering or chills, often due to infections.",
+                    diseases: ["Malaria", "Dengue", "Typhoid", "Pneumonia"],
+                    medicines: ["Paracetamol", "Antimalarials (if malaria)", "Antibiotics (if bacterial)", "Ibuprofen"],
+                    precautions: ["Stay warm", "Drink fluids", "Rest", "Avoid cold exposure"],
+                    symptoms: ["High fever", "Shivering", "Sweating", "Fatigue", "Body aches"],
+                    advice: "If fever with chills persists for more than 48 hours or is accompanied by confusion or breathing issues, seek immediate medical help."
+                },
+                "بخار کے ساتھ ٹھنڈ لگنا": {
+                    description: "بخار کے ساتھ ٹھنڈ لگنا ایک ایسی حالت ہے جہاں جسم کا درجہ حرارت بڑھنے کے ساتھ کپکپی یا ٹھنڈ لگتی ہے، جو اکثر انفیکشن کی وجہ سے ہوتی ہے۔",
+                    diseases: ["ملیریا", "ڈینگی", "ٹائیفائیڈ", "نمونیا"],
+                    medicines: ["پیرسامیٹول", "اینٹی ملیریل (اگر ملیریا ہو)", "اینٹی بایوٹکس (اگر بیکٹیریا ہو)", "ایبوپروفین"],
+                    precautions: ["گرم رہیں", "مائعات پیئیں", "آرام کریں", "ٹھنڈ سے بچیں"],
+                    symptoms: ["تیز بخار", "کپکپی", "پسینہ", "تھکن", "جسم میں درد"],
+                    advice: "اگر بخار کے ساتھ ٹھنڈ 48 گھنٹوں سے زیادہ رہے یا الجھن یا سانس کے مسائل ہوں، تو فوراً طبی مدد لیں۔"
+                }
+            }
+        };
+
         // DOM Elements
         const themeToggle = document.getElementById('themeToggle');
         const englishBtn = document.getElementById('englishBtn');
@@ -1585,216 +2454,224 @@
         let recognition;
         let selectedSymptoms = [];
         let allSymptoms = [];
+        let conversationHistory = [];
         
-        // Common medicines database (fallback if API fails)
-        const commonMedicines = {
-            "cold": [
-                { 
-                    name: "Paracetamol", 
-                    dose: "500mg", 
-                    frequency: "Every 6-8 hours", 
-                    purpose: "For fever and pain relief",
-                    warning: "Do not exceed 4 doses in 24 hours"
-                },
-                { 
-                    name: "Chlorpheniramine", 
-                    dose: "4mg", 
-                    frequency: "Every 4-6 hours", 
-                    purpose: "For runny nose and sneezing",
-                    warning: "May cause drowsiness"
-                }
-            ],
-            "cough": [
-                { 
-                    name: "Dextromethorphan", 
-                    dose: "10-20mg", 
-                    frequency: "Every 4-8 hours", 
-                    purpose: "For dry cough",
-                    warning: "Do not use with MAO inhibitors"
-                },
-                { 
-                    name: "Guaifenesin", 
-                    dose: "200-400mg", 
-                    frequency: "Every 4 hours", 
-                    purpose: "For chesty cough with mucus",
-                    warning: "Drink plenty of water"
-                }
-            ],
-            "fever": [
-                { 
-                    name: "Ibuprofen", 
-                    dose: "200-400mg", 
-                    frequency: "Every 6-8 hours", 
-                    purpose: "For fever and pain relief",
-                    warning: "Take with food to avoid stomach upset"
-                },
-                { 
-                    name: "Paracetamol", 
-                    dose: "500mg", 
-                    frequency: "Every 6-8 hours", 
-                    purpose: "For fever and pain relief",
-                    warning: "Do not exceed 4 doses in 24 hours"
-                }
-            ],
-            "headache": [
-                { 
-                    name: "Paracetamol", 
-                    dose: "500mg", 
-                    frequency: "Every 6-8 hours", 
-                    purpose: "Pain relief",
-                    warning: "Do not exceed 4 doses in 24 hours"
-                },
-                { 
-                    name: "Ibuprofen", 
-                    dose: "200-400mg", 
-                    frequency: "Every 6-8 hours", 
-                    purpose: "Pain and inflammation relief",
-                    warning: "Take with food to avoid stomach upset"
-                }
-            ],
-            "diarrhea": [
-                { 
-                    name: "Loperamide", 
-                    dose: "2mg after each loose stool", 
-                    frequency: "Maximum 8mg in 24 hours", 
-                    purpose: "To control diarrhea",
-                    warning: "Not for use in bacterial infections"
-                },
-                { 
-                    name: "Oral Rehydration Solution", 
-                    dose: "As needed", 
-                    frequency: "After each loose stool", 
-                    purpose: "Prevent dehydration",
-                    warning: "Continue even if vomiting occurs"
-                }
-            ]
-        };
-        
-        // Initialize the app
-        function initApp() {
-            setupThemeToggle();
-            setupLanguageToggle();
-            populateSymptoms();
-            setupChat();
-            setupEventListeners();
-            observeAnimations();
-        }
-        
-        // Setup event listeners
-        function setupEventListeners() {
-            emergencyBtn.addEventListener('click', () => {
-                if (isEnglish) {
-                    alert('Please call your local emergency number (e.g., 911 or 112) for immediate assistance.');
-                } else {
-                    alert('براہ کرم فوری مدد کے لیے اپنا مقامی ایمرجنسی نمبر (مثال کے طور پر 112 یا 15) کال کریں۔');
-                }
-            });
-            
-            startChatBtn.addEventListener('click', () => {
-                document.getElementById('chatbot').scrollIntoView({ behavior: 'smooth' });
-                userInput.focus();
-            });
-            
-            learnMoreBtn.addEventListener('click', () => {
-                document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
-            });
-            
-            symptomSearch.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                const symptoms = document.querySelectorAll('.symptom-tag');
-                
-                symptoms.forEach(symptom => {
-                    const text = symptom.textContent.toLowerCase();
-                    if (text.includes(searchTerm)) {
-                        symptom.style.display = 'flex';
-                    } else {
-                        symptom.style.display = 'none';
-                    }
-                });
-            });
-        }
-        
-        // Observe animations when elements come into view
-        function observeAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            document.querySelectorAll('.feature-card, .result-card, .tips-container').forEach(card => {
-                observer.observe(card);
-            });
-        }
+      
+      
+      
+      // Initialize the app
+function initApp() {
+    setupThemeToggle();
+    setupLanguageToggle();
+    populateSymptoms();
+    setupChat();
+    setupEventListeners();
+    observeAnimations();
     
-        // Theme Toggle
-        function setupThemeToggle() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-mode');
-                const icon = themeToggle.querySelector('i');
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
+    // Check auth state and show appropriate welcome message
+    auth.onAuthStateChanged((user) => {
+        showWelcomeMessage(user);
+    });
+}
+
+// Show welcome message that responds to language changes
+function showWelcomeMessage(user) {
+    chatMessages.innerHTML = ''; // Clear previous messages
+    
+    if (user) {
+        // Personalized welcome for logged-in users
+        const welcomeHtml = `
+            <div class="welcome-message-container">
+                <div class="welcome-message">
+                    <div class="welcome-user">
+                        ${user.photoURL ? 
+                            `<img src="${user.photoURL}" class="welcome-avatar" alt="${user.displayName || 'User'}">` : 
+                            `<div class="welcome-avatar" style="background: ${getAvatarColor(user)};">
+                                ${(user.displayName || user.email || 'U').charAt(0).toUpperCase()}
+                            </div>`
+                        }
+                        <div class="welcome-name">${user.displayName || user.email || 'User'}</div>
+                    </div>
+                    <div>${isEnglish ? 
+                        'Welcome back to AI Doctor!' : 
+                        'AI ڈاکٹر میں دوبارہ خوش آمدید! '}</div>
+                </div>
+            </div>
+        `;
+        chatMessages.innerHTML = welcomeHtml;
+    }
+    
+    // Add standard introduction in current language
+    addBotMessage(isEnglish ? 
+        "I'm your AI Doctor. Please describe your symptoms or select from the list above." : 
+        "میں آپ کا AI ڈاکٹر ہوں۔ براہ کرم اپنی علامات بیان کریں یا اوپر دی گئی فہرست سے انتخاب کریں۔");
+}
+
+// Language Toggle
+function setupLanguageToggle() {
+    // Set initial language based on button state
+    isEnglish = englishBtn.classList.contains('active');
+    
+    englishBtn.addEventListener('click', () => {
+        if (!isEnglish) {
+            isEnglish = true;
+            englishBtn.classList.add('active');
+            urduBtn.classList.remove('active');
+            updateLanguageUI();
+            showWelcomeMessage(auth.currentUser);
+        }
+    });
+
+    urduBtn.addEventListener('click', () => {
+        if (isEnglish) {
+            isEnglish = false;
+            englishBtn.classList.remove('active');
+            urduBtn.classList.add('active');
+            updateLanguageUI();
+            showWelcomeMessage(auth.currentUser);
+        }
+    });
+}
+
+// Update all UI elements that need language changes
+function updateLanguageUI() {
+    // Update input placeholders
+    userInput.placeholder = isEnglish ? 
+        "Describe your symptoms here..." : 
+        "اپنی علامات یہاں بیان کریں...";
+    symptomSearch.placeholder = isEnglish ? 
+        "Search symptoms..." : 
+        "علامات تلاش کریں...";
+    
+    // Update symptoms list
+    populateSymptoms();
+    
+    // Update emergency button text
+    emergencyBtn.textContent = isEnglish ? "Emergency Help" : "ایمرجنسی مدد";
+}
+
+// Helper function to generate consistent avatar color
+function getAvatarColor(user) {
+    if (!user) return '#3a7bd5';
+    const str = user.email || user.uid || 'user';
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const hue = Math.abs(hash % 360);
+    return `hsl(${hue}, 70%, 60%)`;
+}
+
+// Add user message to chat
+function addUserMessage(text) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', 'user-message');
+    
+    const user = auth.currentUser;
+    const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    
+    messageDiv.innerHTML = `
+        <div class="message-header">
+            ${user?.photoURL ? 
+                `<img src="${user.photoURL}" class="message-avatar" alt="${user.displayName || 'User'}">` : 
+                `<div class="message-avatar" style="background: ${getAvatarColor(user)};">
+                    ${user ? (user.displayName || user.email || 'U').charAt(0).toUpperCase() : 'U'}
+                </div>`
             }
+            <div class="message-sender">${user?.displayName || user?.email || (isEnglish ? 'You' : 'آپ')}</div>
+            <div class="message-time">${currentTime}</div>
+        </div>
+        <div class="message-content">${escapeHtml(text)}</div>
+    `;
     
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('light-mode');
-                const icon = themeToggle.querySelector('i');
-                
-                if (document.body.classList.contains('light-mode')) {
-                    localStorage.setItem('theme', 'light');
-                    icon.classList.remove('fa-moon');
-                    icon.classList.add('fa-sun');
-                } else {
-                    localStorage.setItem('theme', 'dark');
-                    icon.classList.remove('fa-sun');
-                    icon.classList.add('fa-moon');
-                }
-            });
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// Add bot message to chat
+function addBotMessage(text) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', 'bot-message');
+    const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    
+    messageDiv.innerHTML = `
+        <div class="message-header">
+            <img src="assets/images/ai-doctor-icon.png" class="message-avatar" alt="AI Doctor">
+            <div class="message-sender">${isEnglish ? 'AI Doctor' : 'AI ڈاکٹر'}</div>
+            <div class="message-time">${currentTime}</div>
+        </div>
+        <div class="message-content">
+    `;
+    
+    // Simple markdown support
+    if (text.includes('**') || text.includes('*') || text.includes('##') || text.includes('###')) {
+        messageDiv.classList.add('markdown-content');
+        let htmlText = text
+            .replace(/### (.*?)\n/g, '<h3>$1</h3>')
+            .replace(/## (.*?)\n/g, '<h2>$1</h2>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/\n/g, '<br>');
+        messageDiv.querySelector('.message-content').innerHTML = htmlText;
+    } else {
+        messageDiv.querySelector('.message-content').textContent = text;
+    }
+    
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// Helper function to escape HTML
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+// Setup event listeners
+function setupEventListeners() {
+    emergencyBtn.addEventListener('click', () => {
+        if (isEnglish) {
+            alert('Please call your local emergency number (e.g., 911 or 112) for immediate assistance.');
+        } else {
+            alert('براہ کرم فوری مدد کے لیے اپنا مقامی ایمرجنسی نمبر (مثال کے طور پر 112 یا 15) کال کریں۔');
         }
+    });
     
-        // Language Toggle
-        function setupLanguageToggle() {
-            englishBtn.addEventListener('click', () => {
-                if (!isEnglish) {
-                    isEnglish = true;
-                    englishBtn.classList.add('active');
-                    urduBtn.classList.remove('active');
-                    userInput.placeholder = "Describe your symptoms here...";
-                    symptomSearch.placeholder = "Search symptoms...";
-                    
-                    if (chatMessages.children.length === 1) {
-                        chatMessages.innerHTML = '';
-                        addBotMessage("Hello! I'm your AI Doctor. Please describe your symptoms in detail, and I'll help diagnose your condition and recommend appropriate treatment. You can also select symptoms from the list above.");
-                    }
-                    
-                    // Update symptoms in English
-                    populateSymptoms();
-                }
-            });
+    startChatBtn.addEventListener('click', () => {
+        document.getElementById('chatbot').scrollIntoView({ behavior: 'smooth' });
+        userInput.focus();
+    });
     
-            urduBtn.addEventListener('click', () => {
-                if (isEnglish) {
-                    isEnglish = false;
-                    englishBtn.classList.remove('active');
-                    urduBtn.classList.add('active');
-                    userInput.placeholder = "اپنی علامات یہاں بیان کریں...";
-                    symptomSearch.placeholder = "علامات تلاش کریں...";
-                    
-                    if (chatMessages.children.length === 1) {
-                        chatMessages.innerHTML = '';
-                        addBotMessage("ہیلو! میں آپ کا AI ڈاکٹر ہوں۔ براہ کرم اپنی علامات کو تفصیل سے بیان کریں، اور میں آپ کی حالت کی تشخیص کرنے اور مناسب علاج کی سفارش کرنے میں مدد کروں گا۔ آپ اوپر دی گئی فہرست سے علامات کا انتخاب بھی کر سکتے ہیں۔");
-                    }
-                    
-                    // Update symptoms in Urdu
-                    populateSymptoms();
-                }
-            });
-        }
+    symptomSearch.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const symptoms = document.querySelectorAll('.symptom-tag');
+        
+        symptoms.forEach(symptom => {
+            const text = symptom.textContent.toLowerCase();
+            symptom.style.display = text.includes(searchTerm) ? 'flex' : 'none';
+        });
+    });
+}
+
+// Observe animations when elements come into view
+function observeAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
     
+    document.querySelectorAll('.feature-card, .result-card, .tips-container').forEach(card => {
+        observer.observe(card);
+    });
+}
         // Populate Symptoms
         function populateSymptoms() {
             symptomsGrid.innerHTML = '';
@@ -1885,6 +2762,12 @@
                     userInput.value = '';
                     showTypingIndicator();
                     
+                    // Add to conversation history
+                    conversationHistory.push({
+                        role: "user",
+                        content: message
+                    });
+                    
                     setTimeout(() => {
                         removeTypingIndicator();
                         processUserMessage(message);
@@ -1911,20 +2794,32 @@
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('message', 'bot-message');
             
-            if (text.includes('##') || text.includes('###') || text.includes('---')) {
-                messageDiv.innerHTML = text
+            // Check if text contains markdown formatting
+            if (text.includes('**') || text.includes('*') || text.includes('##') || text.includes('###') || text.includes('---')) {
+                messageDiv.classList.add('markdown-content');
+                
+                // Simple markdown to HTML conversion
+                let htmlText = text
                     .replace(/### (.*?)\n/g, '<h3>$1</h3>')
                     .replace(/## (.*?)\n/g, '<h2>$1</h2>')
-                    .replace(/---/g, '<hr>')
                     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                     .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    .replace(/---/g, '<hr>')
                     .replace(/\n/g, '<br>');
+                
+                messageDiv.innerHTML = htmlText;
             } else {
                 messageDiv.textContent = text;
             }
             
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Add to conversation history
+            conversationHistory.push({
+                role: "assistant",
+                content: text
+            });
         }
     
         function showTypingIndicator() {
@@ -1945,45 +2840,75 @@
             if (typingIndicator) typingIndicator.remove();
         }
     
-        // Process Messages
+        // Process Messages with NLP and Context Awareness
         async function processUserMessage(message) {
             try {
-                let prompt = isEnglish ? 
-                    `Act as a medical doctor. The patient reports: "${message}"${selectedSymptoms.length > 0 ? ` with these symptoms: ${selectedSymptoms.join(', ')}.` : '.'}
-                    Provide:
-                    1. Possible conditions (most likely first) with confidence percentage
-                    2. Recommended medications with exact dosages, frequency, purpose, and warnings
-                    3. Precautionary measures
-                    4. When to see a doctor
-                    Format with clear headings. Don't include any disclaimers.` :
-                    `ایک ڈاکٹر کی حیثیت سے جواب دیں۔ مریض کا کہنا ہے: "${message}"${selectedSymptoms.length > 0 ? ` اور ان علامات کی شکایت ہے: ${selectedSymptoms.join('، ')}.` : '.'}
-                    فراہم کریں:
-                    1. ممکنہ حالات (سب سے ممکنہ پہلے) اعتماد کی فیصد کے ساتھ
-                    2. تجویز کردہ ادویات، صحیح خوراکیں، تعدد، مقصد اور انتباہات
-                    3. احتیاطی تدابیر
-                    4. ڈاکٹر سے کب ملیں
-                    واضح سرخیوں کے ساتھ جواب دیں۔ کوئی ڈس کلیمر شامل نہ کریں۔`;
+                // First check if we have a direct match in our disease data
+                const lowerMessage = message.toLowerCase();
+                let matchedDisease = null;
                 
-                const response = await callGeminiAPI(prompt);
+                // Check for exact matches in both languages
+                for (const [key, data] of Object.entries(diseaseData.diseaseMapping)) {
+                    if (lowerMessage.includes(key.toLowerCase())) {
+                        matchedDisease = data;
+                        break;
+                    }
+                }
                 
-                if (response) {
-                    // Remove any disclaimer text
-                    let cleanedResponse = response.replace(/میں ایک طبی پیشہ ور نہیں ہوں، اس لیے براہ کرم اس معلومات کو طبی مشورے کے طور پر مت سمجھیں۔/g, '')
-                                                 .replace(/I am not a medical professional.*?medical advice./g, '');
-                    
-                    addBotMessage(cleanedResponse);
-                    
-                    // Add our disclaimer at the end
-                    addBotMessage(isEnglish ? 
-                        "Note: This is an AI assistant. For professional medical advice, please consult a doctor." :
-                        "نوٹ: یہ ایک AI معاون ہے۔ پیشہ ورانہ طبی مشورے کے لیے براہ کرم ڈاکٹر سے رجوع کریں۔");
-                    
-                    updateDiagnosisResults(cleanedResponse);
+                if (matchedDisease) {
+                    // We have a direct match in our database
+                    const response = formatDiseaseResponse(matchedDisease, isEnglish);
+                    addBotMessage(response);
+                    updateDiagnosisResultsFromDiseaseData(matchedDisease, isEnglish);
                 } else {
-                    // Fallback to simple medicine recommendations if API fails
-                    const fallbackResponse = generateFallbackResponse(message);
-                    addBotMessage(fallbackResponse);
-                    updateDiagnosisResults(fallbackResponse);
+                    // No direct match, use the AI API with context awareness
+                    let prompt = isEnglish ? 
+                        `Act as a medical doctor. The patient reports: "${message}"${selectedSymptoms.length > 0 ? ` with these symptoms: ${selectedSymptoms.join(', ')}.` : '.'}
+                        
+                        **Patient History Context:**
+                        ${getConversationContext()}
+                        
+                        **Provide:**
+                        1. Possible conditions (most likely first) with confidence percentage
+                        2. Recommended medications with exact dosages, frequency, purpose, and warnings
+                        3. Precautionary measures
+                        4. When to see a doctor
+                        
+                        Format with clear markdown headings. Use **bold** for important warnings. Don't include any disclaimers.` :
+                        `ایک ڈاکٹر کی حیثیت سے جواب دیں۔ مریض کا کہنا ہے: "${message}"${selectedSymptoms.length > 0 ? ` اور ان علامات کی شکایت ہے: ${selectedSymptoms.join('، ')}.` : '.'}
+                        
+                        **مریض کی تاریخ کا سیاق و سباق:**
+                        ${getConversationContext()}
+                        
+                        **فراہم کریں:**
+                        1. ممکنہ حالات (سب سے ممکنہ پہلے) اعتماد کی فیصد کے ساتھ
+                        2. تجویز کردہ ادویات، صحیح خوراکیں، تعدد، مقصد اور انتباہات
+                        3. احتیاطی تدابیر
+                        4. ڈاکٹر سے کب ملیں
+                        
+                        واضح مارک ڈاؤن سرخیوں کے ساتھ جواب دیں۔ اہم انتباہات کے لیے **موٹا** استعمال کریں۔ کوئی ڈس کلیمر شامل نہ کریں۔`;
+                    
+                    const response = await callGeminiAPI(prompt);
+                    
+                    if (response) {
+                        // Remove any disclaimer text
+                        let cleanedResponse = response.replace(/میں ایک طبی پیشہ ور نہیں ہوں، اس لیے براہ کرم اس معلومات کو طبی مشورے کے طور پر مت سمجھیں۔/g, '')
+                                                     .replace(/I am not a medical professional.*?medical advice./g, '');
+                        
+                        addBotMessage(cleanedResponse);
+                        
+                        // Add our disclaimer at the end
+                        addBotMessage(isEnglish ? 
+                            diseaseData.disclaimer.english :
+                            diseaseData.disclaimer.urdu);
+                        
+                        updateDiagnosisResults(cleanedResponse);
+                    } else {
+                        // Fallback to simple medicine recommendations if API fails
+                        const fallbackResponse = generateFallbackResponse(message);
+                        addBotMessage(fallbackResponse);
+                        updateDiagnosisResults(fallbackResponse);
+                    }
                 }
                 
                 selectedSymptoms = [];
@@ -2000,8 +2925,70 @@
                     "معذرت، ایک خرابی پیش آئی۔ براہ کرم دوبارہ کوشش کریں۔");
             }
         }
+        
+        // Get conversation context for NLP processing
+        function getConversationContext() {
+            // Get the last 5 messages for context
+            const relevantMessages = conversationHistory.slice(-5);
+            return relevantMessages.map(msg => {
+                return `${msg.role === 'user' ? 'Patient' : 'Doctor'}: ${msg.content}`;
+            }).join('\n');
+        }
+        
+        // Format disease response from our database
+        function formatDiseaseResponse(diseaseData, isEnglish) {
+            if (isEnglish) {
+                return `### Possible Condition\n${diseaseData.diseases.join(', ')}\n\n### Description\n${diseaseData.description}\n\n### Recommended Medicine\n${
+                    diseaseData.medicines.map(med => `- ${med}`).join('\n')
+                }\n\n### Precautions\n${diseaseData.precautions.map(p => `- ${p}`).join('\n')}\n\n### When to See a Doctor\n**${diseaseData.advice}**`;
+            } else {
+                return `### ممکنہ حالت\n${diseaseData.diseases.join('، ')}\n\n### تفصیل\n${diseaseData.description}\n\n### تجویز کردہ ادویات\n${
+                    diseaseData.medicines.map(med => `- ${med}`).join('\n')
+                }\n\n### احتیاطی تدابیر\n${diseaseData.precautions.map(p => `- ${p}`).join('\n')}\n\n### ڈاکٹر سے کب ملیں\n**${diseaseData.advice}**`;
+            }
+        }
+        
+        // Update diagnosis results from our disease data
+        function updateDiagnosisResultsFromDiseaseData(diseaseData, isEnglish) {
+            // Update diagnosis
+            if (diseaseData.diseases && diseaseData.diseases.length > 0) {
+                diagnosisResult.innerHTML = `
+                    <div class="diagnosis-item">
+                        <div class="diagnosis-name">${diseaseData.diseases.join(', ')}</div>
+                        <div class="diagnosis-confidence">${isEnglish ? "Based on your symptoms" : "آپ کی علامات کی بنیاد پر"}</div>
+                    </div>
+                    <div>${diseaseData.description}</div>
+                `;
+            }
+            
+            // Hide confidence meter since we don't have a percentage
+            confidenceMeter.style.display = 'none';
+            
+            // Update medicines
+            if (diseaseData.medicines && diseaseData.medicines.length > 0) {
+                medicineResult.innerHTML = diseaseData.medicines.map(med => `
+                    <div class="medicine-item">
+                        <div class="medicine-name">${med}</div>
+                        <div class="medicine-details">
+                            ${isEnglish ? 
+                                `<div><strong>Note:</strong> Consult a doctor for exact dosage and frequency</div>` : 
+                                `<div><strong>نوٹ:</strong> صحیح خوراک اور تعدد کے لیے ڈاکٹر سے مشورہ کریں</div>`}
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                medicineResult.innerHTML = isEnglish ? 
+                    "No specific medication recommended. Please consult a doctor." : 
+                    "کوئی مخصوص دوا کی سفارش نہیں۔ براہ کرم ڈاکٹر سے مشورہ کریں۔";
+            }
+            
+            // Update precautions
+            precautionsResult.innerHTML = diseaseData.precautions?.map(p => `
+                <div class="precaution-item">${p}</div>
+            `).join('') || (isEnglish ? "No specific precautions" : "کوئی مخصوص احتیاط نہیں");
+        }
     
-        // Call Gemini API
+        // Call Gemini API with LangChain-like approach
         async function callGeminiAPI(prompt) {
             const apiKey = "AIzaSyByU0KAsZzwlNHXffGIdAkSSr02XAs5LJI";
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
@@ -2045,7 +3032,22 @@
                 lowerMessage.includes('cough') || lowerMessage.includes('khansi') || 
                 lowerMessage.includes('fever') || lowerMessage.includes('bukhar')) {
                 conditions.push(isEnglish ? "Common Cold (80% confidence)" : "عام نزلہ زکام (80% اعتماد)");
-                medicines = [...commonMedicines["cold"], ...commonMedicines["cough"]];
+                medicines = [
+                    {
+                        name: isEnglish ? "Paracetamol" : "پیراسٹامول",
+                        dose: isEnglish ? "500mg" : "500 ملی گرام",
+                        frequency: isEnglish ? "Every 6-8 hours" : "ہر 6-8 گھنٹے بعد",
+                        purpose: isEnglish ? "For fever and pain relief" : "بخار اور درد سے نجات کے لیے",
+                        warning: isEnglish ? "Do not exceed 4 doses in 24 hours" : "24 گھنٹے میں 4 خوراکوں سے زیادہ نہ لیں"
+                    },
+                    {
+                        name: isEnglish ? "Chlorpheniramine" : "کلورفینیرامین",
+                        dose: isEnglish ? "4mg" : "4 ملی گرام",
+                        frequency: isEnglish ? "Every 4-6 hours" : "ہر 4-6 گھنٹے بعد",
+                        purpose: isEnglish ? "For runny nose and sneezing" : "بہتی ناک اور چھینکوں کے لیے",
+                        warning: isEnglish ? "May cause drowsiness" : "نیند طاری کر سکتا ہے"
+                    }
+                ];
                 precautions = isEnglish ? [
                     "Get plenty of rest",
                     "Drink warm fluids like tea or soup",
@@ -2062,7 +3064,7 @@
             if (lowerMessage.includes('headache') || lowerMessage.includes('sardard')) {
                 conditions.push(isEnglish ? "Tension Headache (75% confidence)" : "تناؤ کا سر درد (75% اعتماد)");
                 medicines.push({
-                    name: "Paracetamol",
+                    name: isEnglish ? "Paracetamol" : "پیراسٹامول",
                     dose: isEnglish ? "500mg" : "500 ملی گرام",
                     frequency: isEnglish ? "Every 6-8 hours" : "ہر 6-8 گھنٹے بعد",
                     purpose: isEnglish ? "Pain relief" : "درد سے نجات",
@@ -2096,13 +3098,13 @@
                 precautions.push(isEnglish ? "Please describe your symptoms in more detail" : "براہ کرم اپنی علامات کو مزید تفصیل سے بیان کریں");
             }
             
-            // Format the response
+            // Format the response with markdown
             return isEnglish ? 
                 `### Possible Conditions\n${conditions.join('\n')}\n\n### Recommended Medicine\n${
-                    medicines.map(med => `- ${med.name} (${med.dose}), ${med.frequency} - ${med.purpose}. ${med.warning}`).join('\n')
+                    medicines.map(med => `- **${med.name}** (${med.dose}), ${med.frequency} - ${med.purpose}. **Warning:** ${med.warning}`).join('\n')
                 }\n\n### Precautions\n${precautions.map(p => `- ${p}`).join('\n')}` :
                 `### ممکنہ حالات\n${conditions.join('\n')}\n\n### تجویز کردہ ادویات\n${
-                    medicines.map(med => `- ${med.name} (${med.dose})، ${med.frequency} - ${med.purpose}. ${med.warning}`).join('\n')
+                    medicines.map(med => `- **${med.name}** (${med.dose})، ${med.frequency} - ${med.purpose}. **انتباہ:** ${med.warning}`).join('\n')
                 }\n\n### احتیاطی تدابیر\n${precautions.map(p => `- ${p}`).join('\n')}`;
         }
     
@@ -2165,7 +3167,7 @@
             `).join('') || (isEnglish ? "No specific precautions" : "کوئی مخصوص احتیاط نہیں");
         }
     
-        // Extract Structured Data
+        // Extract Structured Data with NLP patterns
         function extractStructuredData(response, isEnglish) {
             const result = {
                 diagnosis: '',
@@ -2175,9 +3177,9 @@
             };
             
             // Extract diagnosis with confidence
-            const diagnosisMatch = response.match(/(?:1\..*?\n|##.*?\n)(.*?)(?:\n\n|\n##|\n###|$)/s);
-            if (diagnosisMatch) {
-                result.diagnosis = diagnosisMatch[1].trim();
+            const diagnosisSection = response.match(/(?:1\..*?\n|##.*?\n|###.*?\n)(.*?)(?:\n\n|\n##|\n###|$)/s);
+            if (diagnosisSection) {
+                result.diagnosis = diagnosisSection[1].trim();
                 
                 // Try to extract confidence percentage
                 const confidenceMatch = result.diagnosis.match(/(\d+)%/);
@@ -2186,14 +3188,20 @@
                 }
             }
             
-            // Extract medicines
+            // Extract medicines with NLP pattern matching
             const medicineSection = response.match(/(?:2\..*?\n|###.*?\n)(.*?)(?:\n\n|\n##|\n###|$)/s);
             if (medicineSection) {
                 const medicineLines = medicineSection[1].split('\n').filter(line => line.trim());
                 
                 medicineLines.forEach(line => {
                     const lineText = line.replace(/^-\s*/, '').trim();
-                    const medMatch = lineText.match(/(.*?)\s*(?:\(?(dose|خوراک)[:\s]*(.*?)\)?(?:,\s*(frequency|تعدد)[:\s]*(.*?))?(?:,\s*(purpose|مقصد)[:\s]*(.*?))?(?:,\s*(warning|انتباہ)[:\s]*(.*?))?)?/i);
+                    
+                    // Enhanced NLP pattern matching for medicine details
+                    const medPattern = isEnglish ? 
+                        /([A-Za-z][A-Za-z\s-]+)\s*(?:\(?(dose|dosage):?\s*([^),]+)\)?)?\s*(?:,?\s*(frequency):?\s*([^),]+)\)?)?\s*(?:,?\s*(purpose):?\s*([^),.]+)\)?)?\s*(?:,?\s*(warning|caution):?\s*([^),.]+)\)?)?/i :
+                        /([\u0600-\u06FF][\u0600-\u06FF\s-]+)\s*(?:\(?(خوراک|ڈوز):?\s*([^),]+)\)?)?\s*(?:،?\s*(تعدد):?\s*([^),]+)\)?)?\s*(?:،?\s*(مقصد):?\s*([^),.]+)\)?)?\s*(?:،?\s*(انتباہ|خبردار):?\s*([^),.]+)\)?)?/i;
+                    
+                    const medMatch = lineText.match(medPattern);
                     
                     if (medMatch) {
                         const medicine = {
@@ -2207,6 +3215,99 @@
                     }
                 });
             }
+            
+
+
+
+// Stores conversation history
+const conversationHistory = [];
+
+function addToHistory(role, content) {
+    conversationHistory.push({ role, content });
+    if (conversationHistory.length > 10) conversationHistory.shift(); // Limit memory
+}
+
+// Retrieves relevant context
+function getContext() {
+    return conversationHistory.map(msg => `${msg.role}: ${msg.content}`).join("\n");
+}
+
+
+
+
+
+// Generates step-by-step diagnosis
+async function generateDiagnosis(symptoms) {
+    const prompt = `
+        **Patient Symptoms:** ${symptoms.join(", ")}
+        **Step 1:** Identify possible conditions.
+        **Step 2:** Rank by likelihood (with % confidence).
+        **Step 3:** Suggest tests if needed.
+        **Step 4:** Recommend treatments.
+        **Final Answer:** Format as a medical report.
+    `;
+    
+    const diagnosis = await callAI(prompt);
+    return diagnosis;
+}
+
+
+
+
+
+// Flags critical symptoms
+function checkForEmergencies(text) {
+    const emergencies = [
+        "chest pain", "can't breathe", "unconscious", 
+        "severe bleeding", "stroke symptoms"
+    ];
+    
+    const isEmergency = emergencies.some(keyword => 
+        text.toLowerCase().includes(keyword)
+    );
+    
+    if (isEmergency) {
+        alert("🆘 EMERGENCY: Seek immediate medical help!");
+        return true;
+    }
+    return false;
+}
+
+
+
+
+document.querySelectorAll('area').forEach(area => {
+        area.addEventListener('click', (e) => {
+            const symptom = e.target.dataset.symptom;
+            document.getElementById('userInput').value += ` ${symptom}`;
+        });
+    addSymptomToTracker(symptom);
+});
+
+
+// Enhanced NLP Engine
+function analyzeSymptoms(text) {
+    const symptoms = [];
+    const severity = { mild: [], moderate: [], severe: [] };
+    
+    // Detect symptom severity (AI-powered)
+    if (text.includes("severe") || text.includes("unbearable")) {
+        severity.severe.push("high pain level detected");
+    } else if (text.includes("moderate") || text.includes("annoying")) {
+        severity.moderate.push("moderate discomfort");
+    } else {
+        severity.mild.push("mild symptoms");
+    }
+
+    // Medical Entity Recognition
+    const medicalTerms = text.match(/(fever|cough|headache|chest pain|nausea)/gi) || [];
+    symptoms.push(...medicalTerms);
+
+    return { symptoms, severity };
+}
+
+
+
             
             // Extract precautions
             const precautionsSection = response.match(/(?:3\..*?\n|###.*?\n)(.*?)(?:\n\n|\n##|\n###|$)/s);

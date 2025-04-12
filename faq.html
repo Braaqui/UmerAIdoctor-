@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - AI Doctor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --primary-light: #6ae0ff;
+            --secondary: #3a7bd5;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f8f9fa;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-light: rgba(255, 255, 255, 0.1);
+            --transition: all 0.3s ease;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            transition: var(--transition);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(58, 123, 213, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 210, 255, 0.1) 0%, transparent 20%);
+        }
+
+        body.light-mode {
+            background-color: var(--light);
+            color: var(--dark);
+            --glass: rgba(0, 0, 0, 0.05);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--glass);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(18, 18, 18, 0.9);
+            box-shadow: var(--shadow-sm);
+        }
+
+        body.light-mode header {
+            background-color: rgba(248, 249, 250, 0.9);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: var(--border-radius-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        body.light-mode .theme-toggle {
+            color: var(--dark);
+        }
+
+        .theme-toggle:hover {
+            background: var(--glass-light);
+        }
+
+        .content-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--glass);
+            border-radius: var(--border-radius-lg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow-lg);
+        }
+
+        body.light-mode .content-container {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .faq-intro {
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        body.light-mode .faq-intro {
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        .faq-section {
+            margin-bottom: 40px;
+        }
+
+        .faq-section h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        body.light-mode .faq-section h2 {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-question {
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        body.light-mode .faq-question {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-mode .faq-question:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question i {
+            transition: var(--transition);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        body.light-mode .faq-answer {
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        .faq-item.active .faq-question {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-mode .faq-item.active .faq-question {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        body.light-mode .faq-item.active .faq-answer {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        body.light-mode .footer {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 20px;
+                margin: 20px;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            .faq-section h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .content-container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .header-content {
+                justify-content: center;
+            }
+
+            .logo {
+                margin-bottom: 10px;
+            }
+
+            .faq-question {
+                padding: 12px 15px;
+                font-size: 0.95rem;
+            }
+
+            .faq-answer {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>AI Doctor</span>
+                </a>
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn btn-outline">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content-container">
+            <h1>Frequently Asked Questions</h1>
+            <p class="faq-intro">Find answers to common questions about AI Doctor. If you can't find what you're looking for, please <a href="contact.html" style="color: var(--primary);">contact our support team</a>.</p>
+            
+            <div class="faq-section">
+                <h2>General Questions</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What is AI Doctor?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>AI Doctor is an advanced health assistant that uses artificial intelligence to provide personalized health insights and recommendations. It's designed to help you understand your health better and make informed decisions, but it doesn't replace professional medical advice.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is AI Doctor free to use?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>AI Doctor offers both free and premium services. The free version provides basic health insights, while our premium subscription unlocks advanced features like personalized health plans, in-depth analysis, and priority support.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How accurate is AI Doctor?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our AI is trained on vast medical datasets and continuously improved, but it's important to understand that AI Doctor provides informational insights only and should not be used as a substitute for professional medical diagnosis or treatment. Always consult with a qualified healthcare provider for medical concerns.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-section">
+                <h2>Account & Technical</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I reset my password?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>If you've forgotten your password, go to the login page and click "Forgot Password." You'll receive an email with instructions to reset your password. Make sure to check your spam folder if you don't see the email in your inbox.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I delete my account?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you can delete your account at any time. Go to your account settings and select "Delete Account." Please note that this action is permanent and all your data will be erased from our systems.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What devices support AI Doctor?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>AI Doctor works on all modern web browsers (Chrome, Firefox, Safari, Edge) on both desktop and mobile devices. We also offer native apps for iOS and Android available in their respective app stores.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-section">
+                <h2>Privacy & Security</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How is my health data protected?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We take your privacy and security very seriously. All data is encrypted both in transit and at rest. We comply with strict data protection regulations and never share your personal health information without your explicit consent. For more details, please review our <a href="privacy.html" style="color: var(--primary);">Privacy Policy</a>.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can healthcare providers access my data?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, your data is private to you unless you explicitly choose to share it. We offer features that allow you to securely share information with healthcare providers if you wish, but this is always under your control.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2023 AI Doctor. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="faq.html">FAQs</a>
+            <a href="about.html">About</a>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        
+        function setupThemeToggle() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                const icon = themeToggle.querySelector('i');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                const icon = themeToggle.querySelector('i');
+                
+                if (document.body.classList.contains('light-mode')) {
+                    localStorage.setItem('theme', 'light');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    localStorage.setItem('theme', 'dark');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            });
+        }
+
+        // FAQ accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+                
+                // Close other open items
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', setupThemeToggle);
+    </script>
+</body>
+</html>
